@@ -1,0 +1,27 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.add-icon-button {
+  // clip-path: circle(50% at 50% 50%);
+  background-color: rgba($-color-dark, 0.35);
+  font-size: 1.8rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  border: none;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  color: rgba($-color-white, 0.8);
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($-color-dark, 0.85);
+    color: rgba($-color-white, 1);
+    transition: all 0.3s linear;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

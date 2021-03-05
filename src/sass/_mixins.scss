@@ -1,0 +1,56 @@
+@import './variables';
+//*** All mix-ins are here ***//
+@mixin everse-input {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $-color-gray;
+  color: $-color-white !important;
+  text-align: center;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $-color-light;
+  }
+  &:focus {
+    box-shadow: none;
+    background: transparent;
+  }
+}
+
+@mixin canScroll($maxHeight, $maxWidth) {
+  max-height: $maxHeight;
+  max-width: $maxWidth;
+  overflow: auto;
+  overflow-x: hidden;
+  // visibility: hidden;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 9px;
+    &-track {
+      background: rgba($-color-gray, 0.5);
+      border-radius: 10px;
+    }
+    &-thumb {
+      background: $-color-dark;
+      border-radius: 10px;
+      &:hover {
+        background: rgba($-color-dark, 0.5);
+      }
+    }
+  }
+}
+
+@mixin transparent-button {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: inherit;
+}
+
+@mixin hover-effect {
+  &:hover button {
+    transition: all 0.3s linear;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,186 @@
+// Variables Colors
+$-color-primary: #d35d6e;
+$-color-secondary: #5aa469;
+$-color-gray: #bdc3c7;
+$-color-dark: #af0069;
+// $-color-dark: #222831;
+$-color-light: #ecf0f1;
+$-color-black: #000;
+$-color-white: #fff;
+$-font-primary: 'Alata', sans-serif;
+
+// Defaults
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Font family
+@font-face {
+  font-family: 'Alata';
+  src: local('Alata'), url(./fonts/Alata-Regular.ttf) format('truetype');
+}
+//*** All Typography***//
+h2 {
+  font-size: 3rem;
+  font-weight: 300;
+  text-shadow: 0 1px 0 rgba($-color-black, 0.4);
+  margin: 0;
+  color: $-color-white !important;
+}
+
+p {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.text-sm {
+  font-size: 0.8rem;
+}
+
+// Index.js custom Style are all here
+body {
+  font-weight: 400;
+  // This defines what 1rem is
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+  line-height: 1.4;
+  font-family: $-font-primary;
+  background: $-color-dark;
+  color: $-color-white;
+  user-select: none;
+
+  &::after {
+    opacity: 0;
+  }
+
+  .shepherd-active::after {
+    content: '';
+    display: block;
+    background-color: #000 !important;
+    opacity: 0.9;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+  }
+  .shepherd-title {
+    justify-content: center;
+  }
+  .shepherd-footer {
+    justify-content: space-around;
+    text-transform: uppercase;
+  }
+  .shepherd-element.shepherd-open,
+  .shepherd-target.shepherd-enabled {
+    z-index: 10000000;
+    position: relative;
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+  height: 100vh;
+
+  & > div {
+    // max-height: 100vh;
+    min-height: 190px;
+    // height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.5s ease-in;
+    z-index: 0 !important;
+
+    &:nth-of-type(1) {
+      grid-column: 1 / 2;
+    }
+
+    &:nth-of-type(2) {
+      grid-column: 2 / 3;
+    }
+    &:nth-of-type(3) {
+      grid-column: 1 / 2;
+    }
+
+    &:nth-of-type(4) {
+      grid-column: 2 / 3;
+    }
+    &:nth-of-type(5) {
+      grid-column: 1 / 3;
+    }
+    &:nth-of-type(6) {
+      grid-column: 3 / -1;
+      grid-row: 1 / -1;
+    }
+  }
+}
+
+.bg1,
+.bg2 {
+  background: linear-gradient(
+      to right,
+      rgba($-color-black, 0.5),
+      rgba($-color-black, 0.5)
+    ),
+    // url('https://source.unsplash.com/daily?minimalist');
+    // url('https://source.unsplash.com/daily?natural');
+    // url('https://source.unsplash.com/daily?sky&&cloud&&');
+    url('https://source.unsplash.com/daily?space');
+  // url('https://source.unsplash.com/daily?spritual');
+  // url('https://source.unsplash.com/daily?Inspiration');
+  // url('https://source.unsplash.com/daily?success');
+  // url('https://source.unsplash.com/daily?happy');
+  // url('https://source.unsplash.com/daily?beach');
+  // url('https://source.unsplash.com/daily?beach-background');
+  // url('https://source.unsplash.com/daily?neon');
+  // url('https://source.unsplash.com/daily?abstract');
+  // url('https://source.unsplash.com/daily?minimal-interior');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.toggledWidget {
+  display: none;
+  background-color: $-color-gray;
+}
+
+// All ant design elements are below
+.message-box {
+  .ant-message-notice-content {
+    background-color: rgba($-color-dark, 0.5);
+    color: $-color-white;
+    padding: 1.5rem;
+    // text-transform: capitalize;
+
+    &:hover {
+      background-color: rgba($-color-dark, 0.9);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .ant-message-custom-content .ant-message-error {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+  }
+
+  .ant-message-custom-content .ant-message-success {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+  }
+
+  .ant-message-success .anticon {
+    color: rgba($-color-secondary, 1);
+  }
+}
