@@ -2,8 +2,8 @@
 @import '../../sass/variables';
 
 .task {
-  width: 40vw;
-  height: 10rem;
+  width: 80%;
+  height: 80%;
 
   &__add {
     display: flex;
@@ -17,11 +17,12 @@
   }
 
   &__list {
-    @include canScroll(100px, 97%);
+    @include canScroll(20rem, 100%);
+    min-height: 2rem;
+    height: 70%;
+
     font-size: 1.2rem;
     & > ul {
-      // display: none;
-      max-width: 30.5rem;
       color: rgba($-color-white, 1);
       & > li {
         background-color: rgba($-color-dark, 0.8);

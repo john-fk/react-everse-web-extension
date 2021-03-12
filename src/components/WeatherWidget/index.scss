@@ -2,6 +2,14 @@
 @import '../../sass/variables';
 
 .weather {
+  // position: relative;
+  &__refresh {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.3rem;
+  }
+
   &__temp {
     display: grid;
     align-items: center;

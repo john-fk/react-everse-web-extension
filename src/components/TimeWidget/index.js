@@ -60,9 +60,9 @@ const TimeWidget = () => {
     <div className="bg1">
       <div className="time">
         <div className="time-widget">
-          <Greeting greeting={greet} />
-          <Time time={timeState} seconds={seconds} period={period} />
           <Day day={updateDay} />
+          <Time time={timeState} seconds={seconds} period={period} />
+          <Greeting greeting={greet} />
         </div>
       </div>
     </div>

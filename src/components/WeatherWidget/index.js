@@ -4,8 +4,9 @@ import WeatherUnit from './WeatherUnit';
 import WeatherCondition from './WeatherCondition';
 import axios from 'axios';
 import useAxios from 'axios-hooks';
-import PulseLoader from 'react-spinners/PulseLoader';
+import BarLoader from 'react-spinners/BarLoader';
 import { css } from '@emotion/core';
+import { MdRefresh } from 'react-icons/md';
 import './index.scss';
 
 const WeatherWidget = () => {
@@ -36,7 +37,7 @@ const WeatherWidget = () => {
   const [{ data, loading, error }, reFetchData] = useAxios(requestOptions);
 
   if (loading)
-    return <PulseLoader loading={true} css={override} size={10} color="#FFF" />;
+    return <BarLoader loading={true} css={override} size={10} color="#FFF" />;
   if (error) return <p>Error!</p>;
   console.log(data);
   return (
@@ -47,6 +48,11 @@ const WeatherWidget = () => {
           <WeatherUnit data={data} />
           <WeatherCondition conditionData={data.weather} />
         </div>
+        <MdRefresh
+          title="Refresh"
+          className="weather__refresh"
+          onClick={() => reFetchData()}
+        />
       </div>
     </div>
   );

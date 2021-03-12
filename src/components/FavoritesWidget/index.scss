@@ -8,7 +8,9 @@
   &__form {
   }
   &__inner {
-    @include canScroll(156px, 285px);
+    @include canScroll(20rem, 90%);
+    min-height: 5rem;
+    height: 8.5rem;
   }
   &__list {
     display: flex;
