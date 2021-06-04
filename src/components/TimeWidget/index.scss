@@ -1,0 +1,12 @@
+.time {
+  min-width: 80%;
+  height: 80%;
+  display: grid;
+  place-items: center;
+  &__widget {
+    background-color: red;
+
+    .day {
+    }
+  }
+}

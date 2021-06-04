@@ -17,6 +17,23 @@
     background: transparent;
   }
 }
+@mixin everse-input-override {
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  border-bottom: 1px solid $-color-gray !important;
+  color: $-color-white !important;
+  text-align: center;
+  border-radius: 0 !important;
+
+  &::placeholder {
+    color: $-color-light !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+}
 
 @mixin canScroll($maxHeight, $maxWidth) {
   max-height: $maxHeight;

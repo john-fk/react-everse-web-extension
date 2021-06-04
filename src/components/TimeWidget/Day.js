@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const Day = ({ day }) => {
   return (
-    <div className="">
+    <div className="day">
       <p>{day()}</p>
     </div>
   );

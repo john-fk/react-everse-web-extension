@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const WeatherCondition = ({ conditionData }) => {
+  const mainCondition = conditionData.map((item) => item.main);
+
   return (
     <>
-      <p className="text-sm">{conditionData.map((item) => item.main)}</p>
+      <p className="text-sm">{mainCondition}</p>
     </>
   );
 };

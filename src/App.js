@@ -35,12 +35,12 @@ const App = () => {
   const layout = componentsLayout();
 
   return (
-    <div>
+    <>
       <main className="main">
         <ResponsiveGridLayout
           className="layout"
           layout={layout}
-          margin={[10, 10]}
+          margin={[12, 12]}
           containerPadding={[0, 0]}
           autoSize={true}
           verticalCompact={true}
@@ -48,16 +48,6 @@ const App = () => {
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         >
-          {/* {widgetComponents.map((item, idx) => (
-            <div
-              key={idx}
-              data-grid={{ w: 3, h: 5, x: 0, y: 0, minW: 3, minH: 5 }}
-            >
-              {item}
-              {console.log(idx)}
-            </div>
-          ))} */}
-
           <div key="0" data-grid={{ x: 0, y: 0, w: 3, h: 5, minW: 3, minH: 5 }}>
             <TimeWidget />
           </div>
@@ -85,7 +75,7 @@ const App = () => {
           </div>
         </ResponsiveGridLayout>
       </main>
-    </div>
+    </>
   );
 };
 

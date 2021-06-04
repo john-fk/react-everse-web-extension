@@ -3,6 +3,7 @@ import { Greeting } from './Greeting';
 import { Day } from './Day';
 import { Time } from './Time';
 import { formattedMonth, dayOfTheWeek } from '../../utils';
+import './index.scss';
 
 const TimeWidget = () => {
   const [timeState, setTimeState] = useState('');
@@ -59,11 +60,9 @@ const TimeWidget = () => {
   return (
     <div className="bg1">
       <div className="time">
-        <div className="time-widget">
-          <Day day={updateDay} />
-          <Time time={timeState} seconds={seconds} period={period} />
-          <Greeting greeting={greet} />
-        </div>
+        <Day day={updateDay} />
+        <Time time={timeState} seconds={seconds} period={period} />
+        <Greeting greeting={greet} />
       </div>
     </div>
   );

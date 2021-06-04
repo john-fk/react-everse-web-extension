@@ -13,11 +13,7 @@ const AddTask = ({ label, onAdd }) => {
 
   return (
     <div className="task__add">
-      <form
-        className="form-floating task__form"
-        autoComplete="off"
-        onSubmit={onSubmit}
-      >
+      <form className=" task__form" autoComplete="off" onSubmit={onSubmit}>
         <input
           type="text"
           className="task__form-input bg-none form-control"
@@ -33,7 +29,7 @@ const AddTask = ({ label, onAdd }) => {
   );
 };
 
-AddTask.defaultProps = { label: 'Add a Todo...' };
+AddTask.defaultProps = { label: 'Add A New Task...' };
 AddTask.propTypes = { label: PropTypes.string };
 
 export default AddTask;

@@ -38,7 +38,9 @@ const WeatherWidget = () => {
 
   if (loading)
     return <BarLoader loading={true} css={override} size={10} color="#FFF" />;
+
   if (error) return <p>Error!</p>;
+
   console.log(data);
   return (
     <div className="bg1">
