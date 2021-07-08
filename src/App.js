@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import TimeWidget from './components/TimeWidget';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+import CalendarWidget from './components/CalendarWidget';
 import WeatherWidget from './components/WeatherWidget';
 import CovidWidget from './components/CovidWidget';
 import FavoritesWidget from './components/FavoritesWidget';
@@ -8,74 +15,54 @@ import QuotesWidget from './components/QuotesWidget';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from './components/UI/Card';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+// TODO add recoil atoms here
 const App = () => {
   // layout is an array of objects, see the demo for more complete usage
-
-  const widgetComponents = [
-    <TimeWidget />,
-    <WeatherWidget />,
-    <CovidWidget />,
-    <FavoritesWidget />,
-    <TasksWidget />,
-    <QuotesWidget />,
-  ];
-  const componentsLayout = () => {
-    return [
-      { i: '0', x: 0, y: 0, w: 2, h: 2 },
-      { i: '1', x: 1, y: 1, w: 5, h: 5 },
-      { i: '2', x: 2, y: 2, w: 3, h: 5 },
-      { i: '3', x: 3, y: 3, w: 3, h: 5 },
-      { i: '4', x: 4, y: 4, w: 3, h: 5 },
-      { i: '5', x: 5, y: 5, w: 3, h: 5 },
-    ];
-  };
-  const layout = componentsLayout();
-
   return (
-    <>
-      <main className="main">
+    <RecoilRoot>
+      <main className="main py-5">
+        <h2 className="">Good Afternoon Deejay</h2>
+        <small>You’re current screen time is 3h 45min</small>
+        <CalendarWidget />
         <ResponsiveGridLayout
           className="layout"
-          layout={layout}
-          margin={[12, 12]}
-          containerPadding={[0, 0]}
+          margin={[20, 20]}
+          containerPadding={[50, 20]}
           autoSize={true}
           verticalCompact={true}
-          rowHeight={28}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          rowHeight={25}
+          cols={{ lg: 3, md: 10, sm: 6, xs: 4, xxs: 2 }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          isResizable={false}
+          useCSSTransforms={false}
+          // compactType={'horizontal'}
+          isBounded={true}
         >
-          <div key="0" data-grid={{ x: 0, y: 0, w: 3, h: 5, minW: 3, minH: 5 }}>
-            <TimeWidget />
+          <div key="0" data-grid={{ x: 0, y: 0, w: 1, h: 8 }}>
+            <Card
+              childComponent={<CovidWidget />}
+              widgetTitle="Covid-19 Update"
+            />
           </div>
-
-          <div key="1" data-grid={{ x: 3, y: 0, w: 3, h: 5, minW: 3, minH: 5 }}>
-            <WeatherWidget />
+          <div key="1" data-grid={{ x: 1, y: 0, w: 1, h: 8 }}>
+            <Card widgetTitle="Weather" />
           </div>
-          <div key="2" data-grid={{ x: 0, y: 5, w: 3, h: 5, minW: 3, minH: 5 }}>
-            <CovidWidget />
+          <div key="2" data-grid={{ x: 2, y: 0, w: 1, h: 8 }}>
+            <Card widgetTitle="Favorites" />
           </div>
-          <div key="3" data-grid={{ x: 3, y: 5, w: 3, h: 5, minW: 3, minH: 5 }}>
-            <FavoritesWidget />
+          <div key="3" data-grid={{ x: 0, y: 18, w: 2, h: 8 }}>
+            <Card widgetTitle="Task Maker" />
           </div>
-          <div
-            key="4"
-            data-grid={{ x: 0, y: 10, w: 6, h: 5, minW: 6, minH: 5 }}
-          >
-            <TasksWidget />
-          </div>
-          <div
-            key="5"
-            data-grid={{ x: 6, y: 0, w: 6, h: 15, minW: 6, minH: 8 }}
-          >
-            <QuotesWidget />
+          <div key="4" data-grid={{ x: 2, y: 2, w: 1, h: 8 }}>
+            <Card widgetTitle="Daily Quote" />
           </div>
         </ResponsiveGridLayout>
       </main>
-    </>
+    </RecoilRoot>
   );
 };
 
