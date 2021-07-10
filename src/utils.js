@@ -39,6 +39,28 @@ export const isDisabled = (element) => {
 };
 
 /*
+This function gets the current time of day from moment.js hours 24h format
+*/
+
+export const getGreetingTime = (currentTime) => {
+  !currentTime && 'Hello';
+
+  const splitAfternoon = 12; // 24hr time to split the afternoon
+  const splitEvening = 17; // 24hr time to split the evening
+
+
+  if (currentTime >= splitAfternoon && currentTime <= splitEvening) {
+    // Between 12 PM and 5PM
+    return 'Good afternoon';
+  } else if (currentTime >= splitEvening) {
+    // Between 5PM and Midnight
+    return 'Good evening';
+  }
+  // Between dawn and noon
+  return 'Good morning';
+};
+
+/*
 Format months as strings
 */
 export const formattedMonth = (arrayOfTheMonth) => {

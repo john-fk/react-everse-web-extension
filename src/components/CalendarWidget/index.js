@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { IoCalendarOutline } from 'react-icons/io5';
-
 import moment from 'moment';
-import './index.scss';
+import './CalendarWidget.scss';
 
 const CalendarWidget = () => {
-  const displayCalendar = moment().format('dddd, MMMM Do YYYY');
+  const currentCalendarDate = moment().format('dddd, Do MMMM YYYY');
 
   return (
-    <div className="time">
+    <div className="calendar d-flex p-3">
       <IoCalendarOutline />
-      <p>{displayCalendar}</p>
+      <p className="ml-2">{currentCalendarDate}</p>
     </div>
   );
 };

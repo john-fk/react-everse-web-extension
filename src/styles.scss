@@ -1,19 +1,22 @@
-// Variables Colors
-$-color-primary: #d35d6e;
-$-color-secondary: #5aa469;
-$-color-gray: #bdc3c7;
-$-color-dark: #15192c;
-$-color-light: #eaeaea;
-$-color-black: #000;
-$-color-white: #fff;
-$-font-primary: 'Alata', sans-serif;
+// Import all variables
+@import './sass/variables';
 
 // Defaults
 * {
-  margin: 0;
+  margin: 0 !important; // Used to override the default bootstrap & ant-designs behavior
   padding: 0;
   box-sizing: border-box;
 }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// p {
+//   margin: 0;
+// }
 
 // Font family
 @font-face {
