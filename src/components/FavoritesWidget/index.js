@@ -3,7 +3,7 @@ import AddFavorites from './AddFavorites';
 import FavoritesList from './FavoritesList';
 import store from 'store';
 import { showSuccessMessage } from '../../utils';
-import './index.scss';
+import './FavoriteWidget.scss';
 
 const FavoritesWidget = () => {
   const [toggle, setToggle] = useState(false);

@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { RecoilRoot } from 'recoil';
 import CalendarWidget from './components/CalendarWidget';
 import GreetingWidget from './components/GreetingWidget';
 import WeatherWidget from './components/WeatherWidget';
@@ -20,7 +14,6 @@ import Card from './components/UI/Card';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-// TODO add recoil atoms here
 const App = () => {
   // layout is an array of objects, see the demo for more complete usage
   return (
@@ -44,22 +37,19 @@ const App = () => {
           isBounded={true}
         >
           <div key="0" data-grid={{ x: 0, y: 0, w: 1, h: 8 }}>
-            <Card
-              childComponent={<CovidWidget />}
-              widgetTitle="Covid-19 Update"
-            />
+            <Card widgetTitle="Covid-19 Update" widget={<CovidWidget />} />
           </div>
           <div key="1" data-grid={{ x: 1, y: 0, w: 1, h: 8 }}>
-            <Card widgetTitle="Weather" />
+            <Card widgetTitle="Weather" widget={<WeatherWidget />} />
           </div>
           <div key="2" data-grid={{ x: 2, y: 0, w: 1, h: 8 }}>
-            <Card widgetTitle="Favorites" />
+            <Card widgetTitle="Favorites" widget={<FavoritesWidget />} />
           </div>
           <div key="3" data-grid={{ x: 0, y: 18, w: 2, h: 8 }}>
-            <Card widgetTitle="Task Maker" />
+            <Card widgetTitle="Task Maker" widget={<TasksWidget />} />
           </div>
           <div key="4" data-grid={{ x: 2, y: 2, w: 1, h: 8 }}>
-            <Card widgetTitle="Daily Quote" />
+            <Card widgetTitle="Daily Quote" widget={<QuotesWidget />} />
           </div>
         </ResponsiveGridLayout>
       </main>

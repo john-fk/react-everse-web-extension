@@ -56,7 +56,6 @@ const QuotesWidget = () => {
     <div className="bg1">
       <div className="quotes">
         <div className="quotes__inner p-5">
-          <QuotesHeader mode={isBibleSelected()} />
           <div className="quotes__today">
             {isBibleSelected() && <VerseOfTheDay data={bible} />}
             {!isBibleSelected() && <QuoteOfTheDay data={motivation} />}

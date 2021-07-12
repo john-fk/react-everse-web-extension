@@ -1,8 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import { getGreetingTime } from '../../utils';
-
 import './GreetingWidget.scss';
+import { useRecoilState } from 'recoil';
+import { currentAppTime } from '../../EverseStates';
 
 const TimeOfDay = ({ currentTimeOfDay }) => (
   <h2 className="text-capitalize mb-0">
@@ -19,6 +20,13 @@ const ScreenTime = ({ currentScreenTime }) => (
 );
 
 function GreetingWidget() {
+  const [currentTime, setCurrentTime] = useRecoilState(currentAppTime);
+  const showTime = () => moment().startOf('hour').fromNow();
+
+  setInterval(function () {
+    setCurrentTime(showTime());
+  }, 1000);
+
   /*
   TODO Continue working with moment.duration here https://momentjs.com/docs/#/durations/
   const screenTime = moment().fromNow('H');
@@ -30,7 +38,7 @@ function GreetingWidget() {
   return (
     <div className="greeting-widget">
       <TimeOfDay currentTimeOfDay={currentHour} />
-      <ScreenTime currentScreenTime="3h 45min" />
+      <ScreenTime currentScreenTime={currentTime} />
     </div>
   );
 }
