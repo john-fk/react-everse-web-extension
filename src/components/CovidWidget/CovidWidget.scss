@@ -1,0 +1,12 @@
+.covid {
+  &__chart {
+    .apexcharts-legend {
+      &-series {
+        margin-top: 1.5rem !important;
+      }
+      &-text {
+        margin: 0.5rem !important;
+      }
+    }
+  }
+}

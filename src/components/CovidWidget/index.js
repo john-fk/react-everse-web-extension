@@ -1,47 +1,41 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-
-const fetchUserCity = async () =>
-  await axios('http://ip-api.com/json').then((res) => res.data.city);
+import CovidChart from './CovidChart';
+import './CovidWidget.scss';
 
 const CovidWidget = () => {
-  // Queries
-  const { data } = useQuery('userCity', fetchUserCity, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: ipData, isLoading: loadingIpAddress } = useQuery(
+    'userIpAddress',
+    async () => {
+      const res = await axios(`${process.env.IP_ADDRESS_API_URL}`);
+      const fetchedData = await res.data;
+      return fetchedData.country;
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const { data: covidData, isLoading, isError } = useQuery(
+    'userCovidStats',
+    async () => {
+      const res = await axios(`${process.env.COVID19_API_URL}${ipData}`);
+      const fetchedData = await res.data;
+      return fetchedData;
+    },
+    { enabled: !loadingIpAddress, refetchOnWindowFocus: false }
+  );
+
+  if (loadingIpAddress || isLoading) return null;
+  if (isError) return `Oops! Something went wrong: ${Error.message}`;
+
+  const { cases, recovered, tests, deaths } = covidData;
 
   return (
-    <div className="">
-      <div className="covid">
-        Hello from Covid 19 in
-        <p>{data}</p>
-      </div>
+    <div className="covid">
+      <CovidChart covidData={[cases, recovered, deaths]} />
     </div>
   );
 };
-
-/*
-const CovidWidget = () => {
-  // Queries
-  const { isLoading, error, data } = useQuery('userIP', () => {
-    return axios('http://ip-api.com/json').then((res) => res.data);
-  });
-  
-  if (isLoading) return 'Loading...';
-  
-  if (error) return 'An error has occurred: ' + error.message;
-  
-  const userCity = !isLoading && data.city;
-  return (
-    <div className="">
-    <div className="covid">
-    Hello from Covid 19 in {userCity}
-    <p></p>
-    </div>
-    </div>
-    );
-  };
-  
-  */
 export default CovidWidget;

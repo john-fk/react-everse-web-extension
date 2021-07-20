@@ -40,7 +40,11 @@ const App = () => {
             isBounded={true}
           >
             <div key="0" data-grid={{ x: 0, y: 0, w: 1, h: 8 }}>
-              <Card widgetTitle="Covid-19 Update" widget={<CovidWidget />} />
+              <Card
+                widgetTitle="Covid-19 Update"
+                widgetSubTitle={`Status for your area`}
+                widget={<CovidWidget />}
+              />
             </div>
             <div key="1" data-grid={{ x: 1, y: 0, w: 1, h: 8 }}>
               <Card widgetTitle="Weather" widget={<WeatherWidget />} />
