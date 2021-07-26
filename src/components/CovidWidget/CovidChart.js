@@ -5,7 +5,7 @@ const CovidChart = ({ covidData }) => {
   const options = {
     labels: ['Infections', 'Recovered', 'Deaths'],
     colors: ['#D0D2DA', '#00B7FE', '#FD2254'],
-    dataLabels: { enabled: false },
+    dataLabels: { enabled: false }, //Shows the % in the pie
     states: {
       hover: {
         filter: {

@@ -8,22 +8,11 @@
   box-sizing: border-box;
 }
 
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6,
-// p {
-//   margin: 0;
-// }
-
 // Font family
 @font-face {
   font-family: 'Alata';
   src: local('Alata'), url(./fonts/Alata-Regular.ttf) format('truetype');
 }
-//*** All Typography***//
 
 // Index.js custom Style are all here
 body {
@@ -62,6 +51,14 @@ body {
   .shepherd-target.shepherd-enabled {
     z-index: 10000000;
     position: relative;
+  }
+}
+
+//*** All Typography***//
+.heading {
+  &__small {
+    font-size: 0.95rem;
+    color: $-color-dark-alt;
   }
 }
 

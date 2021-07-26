@@ -14,7 +14,7 @@ const TimeOfDay = ({ currentTimeOfDay }) => (
 );
 
 const ScreenTime = ({ currentScreenTime }) => (
-  <small className="screen-time">
+  <small className="heading__small">
     You’re current screen time is {currentScreenTime}
   </small>
 );
