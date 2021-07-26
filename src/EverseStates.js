@@ -6,6 +6,12 @@ export const currentAppTime = atom({
   default: '',
 });
 
+// All app wide states (atom) are here
+export const currentUserCountry = atom({
+  key: 'userCountry',
+  default: '',
+});
+
 /*
 An example of how recoil is used in the desired component
 
