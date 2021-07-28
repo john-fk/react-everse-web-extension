@@ -4,10 +4,10 @@ import axios from 'axios';
 import CovidChart from './CovidChart';
 import './CovidWidget.scss';
 import { useRecoilState } from 'recoil';
-import { currentUserCountry } from '../../EverseStates';
+import { currentUserIp } from '../../EverseStates';
 
 const CovidWidget = () => {
-  const [userCountry, setUserCountry] = useRecoilState(currentUserCountry);
+  const [ipAddress, setIpAddress] = useRecoilState(currentUserIp);
 
   const { data: ipData, isLoading: loadingIpAddress } = useQuery(
     'userIpAddress',
@@ -15,7 +15,7 @@ const CovidWidget = () => {
       const res = await axios(`${process.env.IP_ADDRESS_API_URL}`);
       const fetchedData = await res.data;
       const country = await fetchedData.country;
-      setUserCountry(country);
+      setIpAddress(fetchedData);
       return country;
     },
     {
@@ -37,10 +37,12 @@ const CovidWidget = () => {
   if (isError) return `Oops! Something went wrong: ${Error.message}`;
 
   const { cases, recovered, tests, deaths } = covidData;
-  console.log(userCountry);
+
   return (
     <div className="covid">
-      <small className="heading__small">Status for your {userCountry}</small>
+      <small className="heading__small">
+        Status for your {ipAddress.country}
+      </small>
       <CovidChart covidData={[cases, recovered, deaths]} />
     </div>
   );

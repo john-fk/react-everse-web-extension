@@ -7,9 +7,9 @@ export const currentAppTime = atom({
 });
 
 // All app wide states (atom) are here
-export const currentUserCountry = atom({
-  key: 'userCountry',
-  default: '',
+export const currentUserIp = atom({
+  key: 'userIp',
+  default: {},
 });
 
 /*
