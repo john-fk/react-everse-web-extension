@@ -4,6 +4,7 @@ import { getGreetingTime } from '../../utils';
 import './GreetingWidget.scss';
 import { useRecoilState } from 'recoil';
 import { currentAppTime } from '../../EverseStates';
+import { SubHeading } from '../UI/Heading';
 
 const TimeOfDay = ({ currentTimeOfDay }) => (
   <h2 className="text-capitalize mb-0">
@@ -11,12 +12,6 @@ const TimeOfDay = ({ currentTimeOfDay }) => (
     {/* TODO add user name from name entered by the user */}
     {` Deejay`}
   </h2>
-);
-
-const ScreenTime = ({ currentScreenTime }) => (
-  <small className="heading__small">
-    You’re current screen time is {currentScreenTime}
-  </small>
 );
 
 function GreetingWidget() {
@@ -38,7 +33,7 @@ function GreetingWidget() {
   return (
     <div className="greeting-widget">
       <TimeOfDay currentTimeOfDay={currentHour} />
-      <ScreenTime currentScreenTime={currentTime} />
+      <SubHeading text={`You’re current screen time is ${currentTime}`} />
     </div>
   );
 }

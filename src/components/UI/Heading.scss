@@ -1,0 +1,9 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.heading {
+  &__small {
+    font-size: 0.95rem;
+    color: $-color-dark-alt;
+  }
+}

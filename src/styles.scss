@@ -3,7 +3,7 @@
 
 // Defaults
 * {
-  margin: 0 !important; // Used to override the default bootstrap & ant-designs behavior
+  margin: 0; // Used to override the default bootstrap & ant-designs behavior
   padding: 0;
   box-sizing: border-box;
 }
@@ -55,12 +55,6 @@ body {
 }
 
 //*** All Typography***//
-.heading {
-  &__small {
-    font-size: 0.95rem;
-    color: $-color-dark-alt;
-  }
-}
 
 .layout {
   .react-grid-item {

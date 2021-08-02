@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import CovidChart from './CovidChart';
+import { SubHeading } from '../UI/Heading';
 import { useRecoilState } from 'recoil';
 import { currentUserIp } from '../../EverseStates';
 import './CovidWidget.scss';
@@ -40,9 +41,7 @@ const CovidWidget = () => {
 
   return (
     <div className="covid">
-      <small className="heading__small">
-        Status for your {ipAddress.country}
-      </small>
+      <SubHeading text={`Current status in ${ipAddress.country}`} />
       <CovidChart covidData={[cases, recovered, deaths]} />
     </div>
   );
