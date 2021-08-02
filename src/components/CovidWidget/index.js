@@ -1,10 +1,10 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 import CovidChart from './CovidChart';
-import './CovidWidget.scss';
 import { useRecoilState } from 'recoil';
 import { currentUserIp } from '../../EverseStates';
+import './CovidWidget.scss';
 
 const CovidWidget = () => {
   const [ipAddress, setIpAddress] = useRecoilState(currentUserIp);
