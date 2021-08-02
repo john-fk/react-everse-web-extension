@@ -3,6 +3,25 @@
 
 .weather {
   // position: relative;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+
+  &__unit {
+    font-size: 6rem;
+    margin: 0;
+  }
+  &__icon {
+    color: currentColor;
+    margin-top: -4rem;
+    margin-bottom: -2.5rem;
+    font-size: 8rem;
+    text-align: center;
+  }
+  &__location {
+    font-size: 2rem;
+  }
+
   &__refresh {
     position: absolute;
     top: 1rem;
@@ -61,8 +80,6 @@
   &:hover .isActive {
     font-size: 1rem;
   }
-  &__icon {
-    color: currentColor;
-  }
+
   @include hover-effect();
 }

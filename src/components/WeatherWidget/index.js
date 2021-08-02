@@ -11,22 +11,61 @@ import { MdRefresh } from 'react-icons/md';
 import { useRecoilValue } from 'recoil';
 import { currentUserIp } from '../../EverseStates';
 import './WeatherWidget.scss';
+import WeatherIcon from './WeatherIcon';
+
+const kelvinToFahrenheit = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return Math.round((unitValue - 273.15) * 1.8 + 32);
+};
+
+const kelvinToCelsius = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return Math.round(unitValue - 273.15);
+};
+
+const WeatherLocation = ({ weatherCity, weatherCountry }) => {
+  return (
+    <>
+      <p className="weather__location">
+        {weatherCity}, {weatherCountry}
+      </p>
+    </>
+  );
+};
+
+const Unit = ({ data }) => {
+  const [currentUnit, setCurrentUnit] = useState('');
+
+  if (data !== undefined) {
+    const kelvin = data.temp;
+    const fahrenheit = kelvinToFahrenheit(kelvin);
+    const celsius = kelvinToCelsius(kelvin);
+
+    return (
+      <div>
+        <h2 className="weather__unit">{fahrenheit || celsius}&deg;</h2>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const WeatherWidget = () => {
-  // const [city, setCity] = useState([]);
+  const [weatherData, setWeatherData] = useState({});
   const ipData = useRecoilValue(currentUserIp);
+
   const { city, country, lat, lon, status } = ipData;
   const hasIpLoaded = ipData.status;
 
-  const { data: weatherData, isLoading, isError } = useQuery(
+  const { data, isLoading, isError } = useQuery(
     ['userWeatherData'],
     async () => {
       const res = await axios(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}`
       );
       const fetchedData = await res.data;
-      // TODO get the data to wait before fetching
-      console.log(fetchedData);
+      setWeatherData(fetchedData);
       return fetchedData;
     },
     {
@@ -34,22 +73,18 @@ const WeatherWidget = () => {
     }
   );
 
-  isLoading && <p>Loading...</p>;
-
-  const celsiusToFahrenheit = (celsius) => (celsius * 9) / 5 + 32;
-  const fahrenheitToCelsius = (fahrenheit) => ((fahrenheit - 32) * 5) / 9;
-
-  /*
-  ! Render the data to the dom
-  console.log(data);
-   */
+  if (isLoading) return null;
+  if (isError) return `Oops! Something went wrong: ${Error.message}`;
 
   return (
     <div className="weather">
-      <p>
-        {city}, {country}
-      </p>
-      <h2>{celsiusToFahrenheit(20)}</h2>
+      {!isLoading && (
+        <>
+          <WeatherIcon iconData={weatherData.current} />
+          <Unit data={weatherData.current} />
+          <WeatherLocation weatherCountry={country} weatherCity={city} />
+        </>
+      )}
     </div>
   );
 };
