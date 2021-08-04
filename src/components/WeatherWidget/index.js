@@ -26,7 +26,7 @@ const kelvinToCelsius = (unitValue) => {
 const WeatherLocation = ({ weatherCity, weatherCountry }) => {
   return (
     <>
-      <p className="weather__location">
+      <p className="weather__location my-1">
         {weatherCity}, {weatherCountry}
       </p>
     </>
