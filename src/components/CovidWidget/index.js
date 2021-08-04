@@ -40,7 +40,7 @@ const CovidWidget = () => {
   const { cases, recovered, tests, deaths } = covidData;
 
   return (
-    <div className="covid">
+    <div className="covid px-md-3">
       <SubHeading text={`Current status in ${ipAddress.country}`} />
       <CovidChart covidData={[cases, recovered, deaths]} />
     </div>

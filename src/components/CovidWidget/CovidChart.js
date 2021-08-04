@@ -3,6 +3,22 @@ import Chart from 'react-apexcharts';
 
 const CovidChart = ({ covidData }) => {
   const options = {
+    responsive: [
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: 300,
+          },
+          legend: {
+            show: true,
+            position: 'center',
+            width: undefined,
+            height: undefined,
+          },
+        },
+      },
+    ],
     labels: ['Infections', 'Recovered', 'Deaths'],
     colors: ['#D0D2DA', '#00B7FE', '#FD2254'],
     dataLabels: { enabled: false }, //Shows the % in the pie
@@ -40,12 +56,13 @@ const CovidChart = ({ covidData }) => {
   };
 
   return (
-    <div className="covid__chart mt-5">
+    <div className="covid__chart">
       <Chart
         options={options}
         series={covidData?.map((data) => data)}
         type="donut"
-        size="500"
+        width="350"
+        height="200"
       />
     </div>
   );

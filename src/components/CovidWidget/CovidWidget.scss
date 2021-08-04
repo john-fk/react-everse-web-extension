@@ -1,8 +1,10 @@
 .covid {
+  height: 300px;
   &__chart {
+    margin: 2rem auto;
     .apexcharts-legend {
       &-series {
-        margin-top: 1.5rem !important;
+        margin-top: 1em !important;
       }
       &-text {
         margin: 0.5rem !important;
