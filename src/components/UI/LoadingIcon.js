@@ -1,15 +1,12 @@
 import React from 'react';
-import { css } from '@emotion/core';
-import { PulseLoader } from 'react-spinners';
+import { PuffLoader } from 'react-spinners';
 
 function LoadingIcon() {
-  // Can be a string as well. Need to ensure each key-value pair ends with ;
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
-  return <div>Loading...;</div>;
+  return (
+    <div className="d-flex justify-content-center align-items-center">
+      <PuffLoader color="#fd2254" css="margin: 3em" />
+    </div>
+  );
 }
 
 export default LoadingIcon;
