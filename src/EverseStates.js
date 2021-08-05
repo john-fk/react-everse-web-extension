@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 // All app wide states (atom) are here
 export const currentAppTime = atom({
-  key: 'testCurrentTimeState',
+  key: 'currentTimeState',
   default: '',
 });
 
