@@ -16,7 +16,15 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    // Global default setting for react-query
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
@@ -39,7 +47,7 @@ const App = () => {
             isBounded={true}
           >
             <div key="0" data-grid={{ x: 0, y: 0, w: 1, h: 8 }}>
-              <Card widgetTitle="Covid-19 Update" widget={<CovidWidget />} />
+              <Card widgetTitle="Covid Scanner" widget={<CovidWidget />} />
             </div>
             <div key="1" data-grid={{ x: 1, y: 0, w: 1, h: 8 }}>
               <Card widgetTitle="Weather" widget={<WeatherWidget />} />
