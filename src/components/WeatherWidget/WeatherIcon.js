@@ -13,26 +13,28 @@ import {
 
 const WeatherIcon = ({ iconData }) => {
   const handleIcon = (id) => {
-    if (id >= 200 && id < 232) {
-      return <WiThunderstorm />;
-    } else if (id >= 300 && id < 321) {
-      return <WiSleet />;
-    } else if (id >= 500 && id < 531) {
-      return <WiRain />;
-    } else if (id >= 600 && id < 622) {
-      return <WiSnow />;
-    } else if (id >= 701 && id < 781) {
-      return <WiFog />;
-    } else if (id === 800) {
-      return <WiCloud />;
-    } else if (id > 800 && id <= 804) {
-      return <WiCloudy />;
-    } else return <WiNa />;
+    return id >= 200 && id < 232 ? (
+      <WiThunderstorm />
+    ) : id >= 300 && id < 321 ? (
+      <WiSleet />
+    ) : id >= 500 && id < 531 ? (
+      <WiRain />
+    ) : id >= 600 && id < 622 ? (
+      <WiSnow />
+    ) : id >= 701 && id < 781 ? (
+      <WiFog />
+    ) : id === 800 ? (
+      <WiCloudy />
+    ) : id > 800 && id <= 804 ? (
+      <WiCloudy />
+    ) : (
+      <WiNa />
+    );
   };
 
   return (
     <i className="weather__icon">
-      {iconData !== undefined && handleIcon(iconData.weather[0].id)}
+      {iconData && handleIcon(iconData.weather[0].id)}
     </i>
   );
 };
