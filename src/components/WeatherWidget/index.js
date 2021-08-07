@@ -1,64 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import WeatherCity from './WeatherCity';
-import WeatherUnit from './WeatherUnit';
-import WeatherCondition from './WeatherCondition';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import useAxios from 'axios-hooks';
-import BarLoader from 'react-spinners/BarLoader';
-import { css } from '@emotion/core';
-import { MdRefresh } from 'react-icons/md';
 import { useRecoilValue } from 'recoil';
 import { currentUserIp } from '../../EverseStates';
 import './WeatherWidget.scss';
 import WeatherIcon from './WeatherIcon';
+import LoadingIcon from '../UI/LoadingIcon';
+import { WiCelsius, WiFahrenheit } from 'react-icons/wi';
 
 const kelvinToFahrenheit = (unitValue) => {
   unitValue = parseFloat(unitValue);
-  return Math.round((unitValue - 273.15) * 1.8 + 32);
+  return `${Math.round((unitValue - 273.15) * 1.8 + 32)}­°F`;
 };
 
 const kelvinToCelsius = (unitValue) => {
   unitValue = parseFloat(unitValue);
-  return Math.round(unitValue - 273.15);
+  return `${Math.round(unitValue - 273.15)}°C`;
 };
 
 const WeatherLocation = ({ weatherCity, weatherCountry }) => {
   return (
-    <>
+    weatherCity !== undefined &&
+    weatherCountry !== undefined && (
       <p className="weather__location my-1">
-        {weatherCity}, {weatherCountry}
+        {`${weatherCity},${weatherCountry}`}
       </p>
-    </>
+    )
   );
 };
 
-const Unit = ({ data }) => {
-  const [currentUnit, setCurrentUnit] = useState('');
+const WeatherUnit = ({ data, selectedUnit }) => {
+  const kelvin = data?.temp;
+  const fahrenheit = kelvinToFahrenheit(kelvin);
+  const celsius = kelvinToCelsius(kelvin);
 
-  if (data !== undefined) {
-    const kelvin = data.temp;
-    const fahrenheit = kelvinToFahrenheit(kelvin);
-    const celsius = kelvinToCelsius(kelvin);
-
-    return (
-      <div>
-        <h2 className="weather__unit">{fahrenheit || celsius}&deg;</h2>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div>
+      {data && (
+        <>
+          <h2 className="weather__unit">
+            {(selectedUnit && fahrenheit) || (!selectedUnit && celsius)}
+          </h2>
+        </>
+      )}
+    </div>
+  );
 };
 
 const WeatherWidget = () => {
+  const [currentUnit, setCurrentUnit] = useState(true);
   const [weatherData, setWeatherData] = useState({});
   const ipData = useRecoilValue(currentUserIp);
 
   const { city, country, lat, lon, status } = ipData;
-  const hasIpLoaded = ipData.status;
+  const hasIpLoaded = ipData?.status;
 
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading, isError, isFetching } = useQuery(
     ['userWeatherData'],
     async () => {
       const res = await axios(
@@ -66,25 +63,50 @@ const WeatherWidget = () => {
       );
       const fetchedData = await res.data;
       setWeatherData(fetchedData);
+      console.log(fetchedData);
       return fetchedData;
     },
     {
       enabled: !!hasIpLoaded,
     }
   );
+  console.log(hasIpLoaded);
 
-  if (isLoading) return null;
-  if (isError) return `Oops! Something went wrong: ${Error.message}`;
+  if (isFetching || !hasIpLoaded || isLoading) return <LoadingIcon />;
+  if (isError) return <SubHeading text={`Check your internet connection`} />;
 
   return (
     <div className="weather">
-      {!isLoading && (
+      {!isLoading && !!isFetching && (
         <>
+          <UnitController
+            iconSize="4rem"
+            isUnitToggled={() => setCurrentUnit(!currentUnit)}
+          />
           <WeatherIcon iconData={weatherData.current} />
-          <Unit data={weatherData.current} />
+          <WeatherUnit data={weatherData.current} selectedUnit={currentUnit} />
           <WeatherLocation weatherCountry={country} weatherCity={city} />
         </>
       )}
+    </div>
+  );
+};
+
+const UnitController = ({ isUnitToggled, iconSize }) => {
+  // TODO add functionality to this
+
+  return (
+    <div className="weather__controller">
+      <WiCelsius
+        size={iconSize}
+        className="weather__controller-control"
+        onClick={isUnitToggled}
+      />
+      <WiFahrenheit
+        size={iconSize}
+        className="weather__controller-control"
+        onClick={isUnitToggled}
+      />
     </div>
   );
 };
