@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import CovidChart from './CovidChart';
 import { SubHeading } from '../UI/Heading';
+import LoadingIcon from '../UI/LoadingIcon';
 import { useRecoilState } from 'recoil';
 import { currentUserIp } from '../../EverseStates';
 import './CovidWidget.scss';
@@ -34,14 +35,14 @@ const CovidWidget = () => {
     { enabled: !loadingIpAddress, refetchOnWindowFocus: false }
   );
 
-  if (loadingIpAddress || isLoading) return null;
-  if (isError) return `Oops! Something went wrong: ${Error.message}`;
+  if (loadingIpAddress || isLoading) return <LoadingIcon />;
+  if (isError) return <SubHeading text={`Check your internet connection`} />;
 
   const { cases, recovered, tests, deaths } = covidData;
 
   return (
-    <div className="covid px-md-3">
-      <SubHeading text={`Current status in ${ipAddress.country}`} />
+    <div className="covid">
+      <SubHeading text={`Update status for ${ipAddress.country}`} />
       <CovidChart covidData={[cases, recovered, deaths]} />
     </div>
   );
