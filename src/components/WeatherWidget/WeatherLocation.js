@@ -1,7 +1,7 @@
 import React from 'react';
 
-function WeatherLocation({ propsData }) {
-  const { city, country, status } = propsData;
+function WeatherLocation({ locationData }) {
+  const { city, country, status } = locationData;
   return (
     status === 'success' && (
       <div className="weather__location my-1">

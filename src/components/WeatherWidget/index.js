@@ -10,6 +10,15 @@ import { WiCelsius, WiFahrenheit } from 'react-icons/wi';
 import WeatherLocation from './WeatherLocation';
 import WeatherUnit from './WeatherUnit';
 
+async function fetchDataFromApi(lat, lon) {
+  const res = await axios(
+    `${process.env.OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}`
+  );
+  const fetchedData = await res.data;
+  // console.log(fetchedData);
+  return fetchedData;
+}
+
 const WeatherWidget = () => {
   const ipData = useRecoilValue(currentUserIp);
   const { lat, lon } = ipData;
@@ -18,20 +27,16 @@ const WeatherWidget = () => {
   const hasIpLoaded = ipData?.status;
 
   const { data, isLoading, isError, isFetching } = useQuery(
-    ['userWeatherData'],
-    async () => {
-      const res = await axios(
-        `${process.env.OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}`
-      );
-      const fetchedData = await res.data;
-      setWeatherData(fetchedData);
-      console.log(fetchedData);
-      return fetchedData;
-    },
+    ['userWeatherData', lat, lon],
+    () => fetchDataFromApi(lat, lon),
     {
       enabled: !!hasIpLoaded,
     }
   );
+
+  useEffect(() => {
+    setWeatherData(data);
+  }, [data]);
 
   if (isFetching || !hasIpLoaded || isLoading) return <LoadingIcon />;
   if (isError) return <SubHeading text={`Check your internet connection`} />;
@@ -40,31 +45,11 @@ const WeatherWidget = () => {
     <div className="weather">
       {!isLoading && (
         <>
-          <UnitController iconSize="4rem" />
           <WeatherIcon iconData={weatherData?.current} />
-          <WeatherUnit data={weatherData?.current} />
-          <WeatherLocation propsData={ipData} />
+          <WeatherUnit unitData={weatherData?.current} />
+          <WeatherLocation locationData={ipData} />
         </>
       )}
-    </div>
-  );
-};
-
-const UnitController = ({ isUnitToggled, iconSize }) => {
-  // TODO add functionality to this
-
-  return (
-    <div className="weather__controller">
-      <WiCelsius
-        size={iconSize}
-        className="weather__controller-control"
-        onClick={console.log(true)}
-      />
-      <WiFahrenheit
-        size={iconSize}
-        className="weather__controller-control"
-        onClick={console.log(false)}
-      />
     </div>
   );
 };

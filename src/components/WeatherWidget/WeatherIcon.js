@@ -8,14 +8,22 @@ import {
   WiFog,
   WiCloud,
   WiCloudy,
+  WiDaySunny,
   WiNa,
 } from 'react-icons/wi';
+import moment from 'moment';
+import { getGreetingTime } from '../../utils';
+
+const timeOfDay = () => getGreetingTime(moment().format('H'));
+const isNight = () => (timeOfDay === 'evening' ? true : false);
+console.log(timeOfDay());
+console.log(isNight());
 
 const WeatherIcon = ({ iconData }) => {
   const handleIcon = (id) => {
-    return id >= 200 && id < 232 ? (
+    return id >= 200 && id <= 232 ? (
       <WiThunderstorm />
-    ) : id >= 300 && id < 321 ? (
+    ) : id >= 300 && id <= 321 ? (
       <WiSleet />
     ) : id >= 500 && id < 531 ? (
       <WiRain />
@@ -24,7 +32,7 @@ const WeatherIcon = ({ iconData }) => {
     ) : id >= 701 && id < 781 ? (
       <WiFog />
     ) : id === 800 ? (
-      <WiCloudy />
+      <WiDaySunny />
     ) : id > 800 && id <= 804 ? (
       <WiCloudy />
     ) : (
