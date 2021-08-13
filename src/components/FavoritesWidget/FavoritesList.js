@@ -4,7 +4,7 @@ import AddButtonIcon from '../UI/AddButtonIcon';
 
 const FavoritesList = ({ favorites, toggleForm, onDelete }) => {
   return (
-    <div className="favorites__inner">
+    <div className="favorites__inner my-4">
       <ul className="favorites__list px-0 py-2">
         <AddButtonIcon
           isVisible={true}

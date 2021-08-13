@@ -48,7 +48,6 @@ export const getGreetingTime = (currentTime) => {
   const splitAfternoon = 12; // 24hr time to split the afternoon
   const splitEvening = 17; // 24hr time to split the evening
 
-
   if (currentTime >= splitAfternoon && currentTime <= splitEvening) {
     // Between 12 PM and 5PM
     return 'Good afternoon';
@@ -317,4 +316,20 @@ export const appIntro = () => {
   });
 
   localStorage.getItem('Current_intro') !== null ? tour.cancel() : tour.start();
+};
+
+/*
+Exports kelvinToFahrenheit helper
+*/
+export const kelvinToFahrenheit = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return `${Math.round((unitValue - 273.15) * 1.8 + 32)}­°F`;
+};
+
+/*
+Exports kelvinToCelsius helper
+*/
+export const kelvinToCelsius = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return `${Math.round(unitValue - 273.15)}°C`;
 };

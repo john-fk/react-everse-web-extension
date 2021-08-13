@@ -13,6 +13,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from './components/UI/Card';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { SubHeading } from './components/UI/Heading';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        cacheTime: 3600000, // TODO Try Caching data for 1 hour before refreshing
       },
     },
   });

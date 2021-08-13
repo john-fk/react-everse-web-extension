@@ -3,6 +3,7 @@ import AddFavorites from './AddFavorites';
 import FavoritesList from './FavoritesList';
 import store from 'store';
 import { showSuccessMessage } from '../../utils';
+import { SubHeading } from '../UI/Heading';
 import './FavoriteWidget.scss';
 
 const FavoritesWidget = () => {
@@ -44,17 +45,16 @@ const FavoritesWidget = () => {
   };
 
   return (
-    <div className="bg1">
-      <div className="favorites">
-        {!toggle && (
-          <FavoritesList
-            favorites={texts}
-            toggleForm={toggleForm}
-            onDelete={deleteFavorites}
-          />
-        )}
-        {toggle && <AddFavorites isToggled={toggleForm} onAdd={addFavorite} />}
-      </div>
+    <div className="favorites">
+      <SubHeading text="You have 13 favorite websites" />
+      {!toggle && (
+        <FavoritesList
+          favorites={texts}
+          toggleForm={toggleForm}
+          onDelete={deleteFavorites}
+        />
+      )}
+      {toggle && <AddFavorites isToggled={toggleForm} onAdd={addFavorite} />}
     </div>
   );
 };
