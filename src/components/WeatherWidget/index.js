@@ -7,34 +7,14 @@ import './WeatherWidget.scss';
 import WeatherIcon from './WeatherIcon';
 import LoadingIcon from '../UI/LoadingIcon';
 import { WiCelsius, WiFahrenheit } from 'react-icons/wi';
-// import { kelvinToFahrenheit, kelvinToCelsius } from '../../utils';
 import WeatherLocation from './WeatherLocation';
 import WeatherUnit from './WeatherUnit';
 
-// const WeatherUnit = ({ data, selectedUnit }) => {
-//   const kelvin = data?.temp;
-//   const fahrenheit = kelvinToFahrenheit(kelvin);
-//   const celsius = kelvinToCelsius(kelvin);
-
-//   return (
-//     <div>
-//       {data && (
-//         <>
-//           <h2 className="weather__unit">
-//             {(selectedUnit && fahrenheit) || (!selectedUnit && celsius)}
-//           </h2>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
 const WeatherWidget = () => {
+  const ipData = useRecoilValue(currentUserIp);
+  const { lat, lon } = ipData;
   const [weatherData, setWeatherData] = useState({});
 
-  const ipData = useRecoilValue(currentUserIp);
-
-  const { lat, lon } = ipData;
   const hasIpLoaded = ipData?.status;
 
   const { data, isLoading, isError, isFetching } = useQuery(
@@ -61,7 +41,7 @@ const WeatherWidget = () => {
       {!isLoading && (
         <>
           <UnitController iconSize="4rem" />
-          <WeatherIcon iconData={weatherData.current} />
+          <WeatherIcon iconData={weatherData?.current} />
           <WeatherUnit data={weatherData?.current} />
           <WeatherLocation propsData={ipData} />
         </>
