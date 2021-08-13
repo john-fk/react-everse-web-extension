@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { kelvinToFahrenheit, kelvinToCelsius } from '../../utils';
 
-function WeatherUnit({ data, selectedUnit }) {
+function WeatherUnit({ data }) {
+  const [currentUnit, setCurrentUnit] = useState(true);
+
   const kelvin = data?.temp;
   const fahrenheit = kelvinToFahrenheit(kelvin);
   const celsius = kelvinToCelsius(kelvin);
@@ -11,7 +13,7 @@ function WeatherUnit({ data, selectedUnit }) {
       {data && (
         <>
           <h2 className="weather__unit">
-            {(selectedUnit && fahrenheit) || (!selectedUnit && celsius)}
+            {(currentUnit && fahrenheit) || (!currentUnit && celsius)}
           </h2>
         </>
       )}

@@ -30,8 +30,8 @@ import WeatherUnit from './WeatherUnit';
 // };
 
 const WeatherWidget = () => {
-  const [currentUnit, setCurrentUnit] = useState(true);
   const [weatherData, setWeatherData] = useState({});
+
   const ipData = useRecoilValue(currentUserIp);
 
   const { lat, lon } = ipData;
@@ -62,7 +62,7 @@ const WeatherWidget = () => {
         <>
           <UnitController iconSize="4rem" />
           <WeatherIcon iconData={weatherData.current} />
-          <WeatherUnit data={weatherData.current} selectedUnit={currentUnit} />
+          <WeatherUnit data={weatherData?.current} />
           <WeatherLocation propsData={ipData} />
         </>
       )}
