@@ -50,13 +50,13 @@ export const getGreetingTime = (currentTime) => {
 
   if (currentTime >= splitAfternoon && currentTime <= splitEvening) {
     // Between 12 PM and 5PM
-    return 'Good afternoon';
+    return 'afternoon';
   } else if (currentTime >= splitEvening) {
     // Between 5PM and Midnight
-    return 'Good evening';
+    return 'evening';
   }
   // Between dawn and noon
-  return 'Good morning';
+  return 'morning';
 };
 
 /*
@@ -323,7 +323,7 @@ Exports kelvinToFahrenheit helper
 */
 export const kelvinToFahrenheit = (unitValue) => {
   unitValue = parseFloat(unitValue);
-  return `${Math.round((unitValue - 273.15) * 1.8 + 32)}­°F`;
+  return `${Math.round((unitValue - 273.15) * 1.8 + 32)}­`;
 };
 
 /*
@@ -331,5 +331,5 @@ Exports kelvinToCelsius helper
 */
 export const kelvinToCelsius = (unitValue) => {
   unitValue = parseFloat(unitValue);
-  return `${Math.round(unitValue - 273.15)}°C`;
+  return `${Math.round(unitValue - 273.15)}`;
 };

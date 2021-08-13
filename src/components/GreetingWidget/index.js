@@ -8,7 +8,7 @@ import { currentAppTime } from '../../EverseStates';
 
 const TimeOfDay = ({ currentTimeOfDay }) => (
   <h2 className="text-capitalize mb-0">
-    {getGreetingTime(currentTimeOfDay)}
+    {`Good ${getGreetingTime(currentTimeOfDay)}`}
     {/* TODO add user name from name entered by the user */}
     {` Deejay`}
   </h2>
