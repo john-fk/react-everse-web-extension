@@ -1,7 +1,26 @@
+import React from 'react';
 import axios from 'axios';
 import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { message } from 'antd';
+import moment from 'moment';
+import {
+  WiDayThunderstorm,
+  WiNightAltThunderstorm,
+  WiDayShowers,
+  WiNightAltShowers,
+  WiDayRain,
+  WiNightAltRain,
+  WiDaySnow,
+  WiNightAltSnow,
+  WiDayFog,
+  WiNightFog,
+  WiDayCloudy,
+  WiDaySunny,
+  WiNightClear,
+  WiNightAltCloudy,
+  WiNa,
+} from 'react-icons/wi';
 
 // Gets a random Item from an array
 export const getRandomItem = (data, setDataState) => {
@@ -57,97 +76,6 @@ export const getGreetingTime = (currentTime) => {
   }
   // Between dawn and noon
   return 'morning';
-};
-
-/*
-Format months as strings
-*/
-export const formattedMonth = (arrayOfTheMonth) => {
-  let date = new Date();
-  arrayOfTheMonth = new Array();
-
-  arrayOfTheMonth[0] = 'Jan';
-  arrayOfTheMonth[1] = 'Feb';
-  arrayOfTheMonth[2] = 'Mar';
-  arrayOfTheMonth[3] = 'Apr';
-  arrayOfTheMonth[4] = 'May';
-  arrayOfTheMonth[5] = 'Jun';
-  arrayOfTheMonth[6] = 'Jul';
-  arrayOfTheMonth[7] = 'Aug';
-  arrayOfTheMonth[8] = 'Sep';
-  arrayOfTheMonth[9] = 'Oct';
-  arrayOfTheMonth[10] = 'Nov';
-  arrayOfTheMonth[11] = 'Dec';
-  return arrayOfTheMonth[date.getMonth()];
-};
-
-export const dayOfTheWeek = () => {
-  let day;
-  switch (new Date().getDay()) {
-    case 0:
-      day = 'Sunday';
-      break;
-    case 1:
-      day = 'Monday';
-      break;
-    case 2:
-      day = 'Tuesday';
-      break;
-    case 3:
-      day = 'Wednesday';
-      break;
-    case 4:
-      day = 'Thursday';
-      break;
-    case 5:
-      day = 'Friday';
-      break;
-    case 6:
-      day = 'Saturday';
-  }
-  return day;
-};
-/*
-Returns a formatted date string for covidWidget
-*/
-export const dateFormatted = function () {
-  let date = new Date();
-  let month = date.getMonth();
-  let dYear = date.getFullYear();
-  let d = date.getDate();
-
-  return `${dYear}-${month}-${d}`;
-};
-/*
-Will compare and render the weather icons for a given weather object from openWeatherMap API.
-*/
-export const renderWeatherIcon = (apiIcon) => {
-  let iconClass;
-
-  const checkIconId = function (id) {
-    if (id >= 200 && id < 232) {
-      iconClass = 'bolt';
-    } else if (id >= 300 && id < 321) {
-      iconClass = 'cloud-sun-rain';
-    } else if (id >= 500 && id < 531) {
-      iconClass = 'cloud-showers-heavy';
-    } else if (id >= 600 && id < 622) {
-      iconClass = 'snowflake';
-    } else if (id >= 701 && id < 781) {
-      iconClass = 'wind';
-    } else if (id === 800) {
-      iconClass = 'cloud-sun';
-    } else if (id > 800 && id <= 804) {
-      iconClass = 'smog';
-    } else iconClass = 'rainbow';
-  };
-
-  for (let item of apiIcon) {
-    checkIconId(item.id);
-  }
-
-  const iconElement = `<span class="fas fa-${iconClass}"></span>`;
-  document.querySelector('.weather__temp #icon').innerHTML = iconElement;
 };
 
 /*
@@ -332,4 +260,43 @@ Exports kelvinToCelsius helper
 export const kelvinToCelsius = (unitValue) => {
   unitValue = parseFloat(unitValue);
   return `${Math.round(unitValue - 273.15)}`;
+};
+
+/*
+Checks if the weather ID from openWeatherMap is valid and is night time
+*/
+export const handleWeatherIcons = (weatherId) => {
+  const isNight = () => (moment().format('H') >= 19 ? true : false);
+
+  return weatherId >= 200 && weatherId <= 232 && !isNight ? (
+    <WiDayThunderstorm />
+  ) : weatherId >= 200 && weatherId <= 232 && isNight ? (
+    <WiNightAltThunderstorm />
+  ) : weatherId >= 300 && weatherId <= 321 && !isNight ? (
+    <WiDayShowers />
+  ) : weatherId >= 300 && weatherId <= 321 && isNight ? (
+    <WiNightAltShowers />
+  ) : weatherId >= 500 && weatherId <= 531 && !isNight ? (
+    <WiDayRain />
+  ) : weatherId >= 500 && weatherId <= 531 && isNight ? (
+    <WiNightAltRain />
+  ) : weatherId >= 600 && weatherId <= 622 && !isNight ? (
+    <WiDaySnow />
+  ) : weatherId >= 600 && weatherId <= 622 && isNight ? (
+    <WiNightAltSnow />
+  ) : weatherId >= 701 && weatherId <= 781 && !isNight ? (
+    <WiDayFog />
+  ) : weatherId >= 701 && weatherId <= 781 && isNight ? (
+    <WiNightFog />
+  ) : weatherId === 800 && !isNight ? (
+    <WiDaySunny />
+  ) : weatherId === 800 && isNight ? (
+    <WiNightClear />
+  ) : weatherId > 800 && weatherId <= 804 && !isNight ? (
+    <WiDayCloudy />
+  ) : weatherId > 800 && weatherId <= 804 && isNight ? (
+    <WiNightAltCloudy />
+  ) : (
+    <WiNa />
+  );
 };
