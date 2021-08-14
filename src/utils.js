@@ -3,24 +3,6 @@ import axios from 'axios';
 import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { message } from 'antd';
-import moment from 'moment';
-import {
-  WiDayThunderstorm,
-  WiNightAltThunderstorm,
-  WiDayShowers,
-  WiNightAltShowers,
-  WiDayRain,
-  WiNightAltRain,
-  WiDaySnow,
-  WiNightAltSnow,
-  WiDayFog,
-  WiNightFog,
-  WiDayCloudy,
-  WiDaySunny,
-  WiNightClear,
-  WiNightAltCloudy,
-  WiNa,
-} from 'react-icons/wi';
 
 // Gets a random Item from an array
 export const getRandomItem = (data, setDataState) => {
@@ -260,43 +242,4 @@ Exports kelvinToCelsius helper
 export const kelvinToCelsius = (unitValue) => {
   unitValue = parseFloat(unitValue);
   return `${Math.round(unitValue - 273.15)}`;
-};
-
-/*
-Checks if the weather ID from openWeatherMap is valid and is night time
-*/
-export const handleWeatherIcons = (weatherId) => {
-  const isNight = () => (moment().format('H') >= 19 ? true : false);
-
-  return weatherId >= 200 && weatherId <= 232 && !isNight ? (
-    <WiDayThunderstorm />
-  ) : weatherId >= 200 && weatherId <= 232 && isNight ? (
-    <WiNightAltThunderstorm />
-  ) : weatherId >= 300 && weatherId <= 321 && !isNight ? (
-    <WiDayShowers />
-  ) : weatherId >= 300 && weatherId <= 321 && isNight ? (
-    <WiNightAltShowers />
-  ) : weatherId >= 500 && weatherId <= 531 && !isNight ? (
-    <WiDayRain />
-  ) : weatherId >= 500 && weatherId <= 531 && isNight ? (
-    <WiNightAltRain />
-  ) : weatherId >= 600 && weatherId <= 622 && !isNight ? (
-    <WiDaySnow />
-  ) : weatherId >= 600 && weatherId <= 622 && isNight ? (
-    <WiNightAltSnow />
-  ) : weatherId >= 701 && weatherId <= 781 && !isNight ? (
-    <WiDayFog />
-  ) : weatherId >= 701 && weatherId <= 781 && isNight ? (
-    <WiNightFog />
-  ) : weatherId === 800 && !isNight ? (
-    <WiDaySunny />
-  ) : weatherId === 800 && isNight ? (
-    <WiNightClear />
-  ) : weatherId > 800 && weatherId <= 804 && !isNight ? (
-    <WiDayCloudy />
-  ) : weatherId > 800 && weatherId <= 804 && isNight ? (
-    <WiNightAltCloudy />
-  ) : (
-    <WiNa />
-  );
 };
