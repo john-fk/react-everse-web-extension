@@ -243,3 +243,35 @@ export const kelvinToCelsius = (unitValue) => {
   unitValue = parseFloat(unitValue);
   return `${Math.round(unitValue - 273.15)}`;
 };
+
+/*
+An array of  materialUI Colors
+*/
+export const materialColors = [
+  '#ef5350',
+  '#ec407a',
+  '#ab47bc',
+  '#7e57c2',
+  '#5c6bc0',
+  '#42a5f5',
+  '#29b6f6',
+  '#26c6da',
+  '#26a69a',
+  '#66bb6a',
+  '#9ccc65',
+  '#d4e157',
+  '#ffee58',
+  '#ffca28',
+  '#ffa726',
+  '#ff7043',
+  '#bcaaa4',
+  '#bdbdbd',
+  '#90a4ae',
+];
+
+/*
+This function returns a random color from MaterialUi Color SET
+*/
+export const pickRandomColor = () => {
+  return materialColors[Math.floor(Math.random() * materialColors.length)];
+};
