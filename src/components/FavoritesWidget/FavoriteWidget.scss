@@ -8,16 +8,16 @@
   &__form {
   }
   &__inner {
-    @include canScroll(20rem, 90%);
-    min-height: 5rem;
-    height: 8.5rem;
   }
   &__list {
+    @include canScroll(20rem, 90%);
+    min-height: 5rem;
+    height: 12.5rem;
+    border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    scroll-snap-type: y mandatory;
   }
   &__item-container {
     &:hover .favorites__delete {
@@ -25,22 +25,21 @@
     }
   }
   &__item {
-    scroll-snap-align: start;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50px;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 5px;
     border: none;
     display: grid;
     place-items: center;
-    color: rgba($-color-white, 0.8);
     text-shadow: 1px 1px 5px rgba($-color-black, 0.3);
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     text-decoration: none;
-    margin: 5px;
+    margin: 0.4rem;
     position: relative;
     background-color: rgba($-color-dark, 0.85);
     cursor: pointer;
     letter-spacing: 1px;
+    color: rgba($-color-black, 0.8);
 
     &:hover {
       background-color: rgba($-color-dark, 0.85);

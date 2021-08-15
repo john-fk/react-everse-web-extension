@@ -2,7 +2,40 @@
 @import '../../sass/variables';
 
 .weather {
-  // position: relative;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+  &__unit {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    h2 {
+      font-size: 5rem;
+    }
+    .weather-controls {
+      display: grid;
+      align-content: center;
+      &__item {
+        font-size: 2em;
+        &--active {
+          font-size: 3em;
+        }
+      }
+    }
+  }
+  &__icon {
+    font-size: 6rem;
+    color: currentColor;
+    margin-top: -0.5em;
+    margin-bottom: -0.125em;
+    text-align: center;
+  }
+  &__location {
+    font-size: 2.3em;
+  }
+
   &__refresh {
     position: absolute;
     top: 1rem;
@@ -61,8 +94,6 @@
   &:hover .isActive {
     font-size: 1rem;
   }
-  &__icon {
-    color: currentColor;
-  }
+
   @include hover-effect();
 }

@@ -1,0 +1,14 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.widget {
+  overflow: hidden;
+  height: inherit;
+  width: 100%;
+  background: $-color-white;
+  border-radius: 24px;
+  padding: 2.2rem;
+  &__title {
+    font-size: 1.5rem;
+  }
+}

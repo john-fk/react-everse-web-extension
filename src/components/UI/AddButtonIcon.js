@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MdAddCircle } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 import './AddButtonIcon.scss';
+
 const AddButtonIcon = ({ iconContainerStyles, isVisible, onAdd }) => {
   return (
     <div style={iconContainerStyles}>
@@ -10,7 +11,7 @@ const AddButtonIcon = ({ iconContainerStyles, isVisible, onAdd }) => {
         style={{ visibility: isVisible ? 'visible' : 'hidden' }}
         onClick={onAdd}
       >
-        <MdAddCircle />
+        <MdAdd />
       </button>
     </div>
   );

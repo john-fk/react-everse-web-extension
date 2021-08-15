@@ -1,3 +1,4 @@
+import React from 'react';
 import axios from 'axios';
 import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
@@ -39,94 +40,24 @@ export const isDisabled = (element) => {
 };
 
 /*
-Format months as strings
+This function gets the current time of day from moment.js hours 24h format
 */
-export const formattedMonth = (arrayOfTheMonth) => {
-  let date = new Date();
-  arrayOfTheMonth = new Array();
 
-  arrayOfTheMonth[0] = 'Jan';
-  arrayOfTheMonth[1] = 'Feb';
-  arrayOfTheMonth[2] = 'Mar';
-  arrayOfTheMonth[3] = 'Apr';
-  arrayOfTheMonth[4] = 'May';
-  arrayOfTheMonth[5] = 'Jun';
-  arrayOfTheMonth[6] = 'Jul';
-  arrayOfTheMonth[7] = 'Aug';
-  arrayOfTheMonth[8] = 'Sep';
-  arrayOfTheMonth[9] = 'Oct';
-  arrayOfTheMonth[10] = 'Nov';
-  arrayOfTheMonth[11] = 'Dec';
-  return arrayOfTheMonth[date.getMonth()];
-};
+export const getGreetingTime = (currentTime) => {
+  !currentTime && 'Hello';
 
-export const dayOfTheWeek = () => {
-  let day;
-  switch (new Date().getDay()) {
-    case 0:
-      day = 'Sunday';
-      break;
-    case 1:
-      day = 'Monday';
-      break;
-    case 2:
-      day = 'Tuesday';
-      break;
-    case 3:
-      day = 'Wednesday';
-      break;
-    case 4:
-      day = 'Thursday';
-      break;
-    case 5:
-      day = 'Friday';
-      break;
-    case 6:
-      day = 'Saturday';
+  const splitAfternoon = 12; // 24hr time to split the afternoon
+  const splitEvening = 17; // 24hr time to split the evening
+
+  if (currentTime >= splitAfternoon && currentTime <= splitEvening) {
+    // Between 12 PM and 5PM
+    return 'afternoon';
+  } else if (currentTime >= splitEvening) {
+    // Between 5PM and Midnight
+    return 'evening';
   }
-  return day;
-};
-/*
-Returns a formatted date string for covidWidget
-*/
-export const dateFormatted = function () {
-  let date = new Date();
-  let month = date.getMonth();
-  let dYear = date.getFullYear();
-  let d = date.getDate();
-
-  return `${dYear}-${month}-${d}`;
-};
-/*
-Will compare and render the weather icons for a given weather object from openWeatherMap API.
-*/
-export const renderWeatherIcon = (apiIcon) => {
-  let iconClass;
-
-  const checkIconId = function (id) {
-    if (id >= 200 && id < 232) {
-      iconClass = 'bolt';
-    } else if (id >= 300 && id < 321) {
-      iconClass = 'cloud-sun-rain';
-    } else if (id >= 500 && id < 531) {
-      iconClass = 'cloud-showers-heavy';
-    } else if (id >= 600 && id < 622) {
-      iconClass = 'snowflake';
-    } else if (id >= 701 && id < 781) {
-      iconClass = 'wind';
-    } else if (id === 800) {
-      iconClass = 'cloud-sun';
-    } else if (id > 800 && id <= 804) {
-      iconClass = 'smog';
-    } else iconClass = 'rainbow';
-  };
-
-  for (let item of apiIcon) {
-    checkIconId(item.id);
-  }
-
-  const iconElement = `<span class="fas fa-${iconClass}"></span>`;
-  document.querySelector('.weather__temp #icon').innerHTML = iconElement;
+  // Between dawn and noon
+  return 'morning';
 };
 
 /*
@@ -295,4 +226,52 @@ export const appIntro = () => {
   });
 
   localStorage.getItem('Current_intro') !== null ? tour.cancel() : tour.start();
+};
+
+/*
+Exports kelvinToFahrenheit helper
+*/
+export const kelvinToFahrenheit = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return `${Math.round((unitValue - 273.15) * 1.8 + 32)}­`;
+};
+
+/*
+Exports kelvinToCelsius helper
+*/
+export const kelvinToCelsius = (unitValue) => {
+  unitValue = parseFloat(unitValue);
+  return `${Math.round(unitValue - 273.15)}`;
+};
+
+/*
+An array of  materialUI Colors
+*/
+export const materialColors = [
+  '#ef5350',
+  '#ec407a',
+  '#ab47bc',
+  '#7e57c2',
+  '#5c6bc0',
+  '#42a5f5',
+  '#29b6f6',
+  '#26c6da',
+  '#26a69a',
+  '#66bb6a',
+  '#9ccc65',
+  '#d4e157',
+  '#ffee58',
+  '#ffca28',
+  '#ffa726',
+  '#ff7043',
+  '#bcaaa4',
+  '#bdbdbd',
+  '#90a4ae',
+];
+
+/*
+This function returns a random color from MaterialUi Color SET
+*/
+export const pickRandomColor = () => {
+  return materialColors[Math.floor(Math.random() * materialColors.length)];
 };

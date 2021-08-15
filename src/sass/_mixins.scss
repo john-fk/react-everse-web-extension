@@ -5,7 +5,6 @@
   border: none;
   outline: none;
   border-bottom: 1px solid $-color-gray;
-  color: $-color-white !important;
   text-align: center;
   border-radius: 0;
 
@@ -22,7 +21,7 @@
   border: none !important;
   outline: none !important;
   border-bottom: 1px solid $-color-gray !important;
-  color: $-color-white !important;
+
   text-align: center;
   border-radius: 0 !important;
 
@@ -41,15 +40,16 @@
   overflow: auto;
   overflow-x: hidden;
   // visibility: hidden;
+  scroll-snap-type: y mandatory;
   width: 100%;
   &::-webkit-scrollbar {
     width: 9px;
     &-track {
-      background: rgba($-color-gray, 0.5);
+      background: rgba($-color-bg, 0.5);
       border-radius: 10px;
     }
     &-thumb {
-      background: $-color-dark;
+      background: $-color-gray;
       border-radius: 10px;
       &:hover {
         background: rgba($-color-dark, 0.5);

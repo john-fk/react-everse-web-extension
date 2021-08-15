@@ -1,0 +1,14 @@
+@import '../../sass/variables';
+
+.calendar {
+  background: $-color-bg;
+  border-radius: 12px;
+  font-size: 1rem;
+  align-items: center;
+  &__icon {
+    font-size: 1.3rem;
+  }
+  &__text {
+    margin: 0.1em auto;
+  }
+}

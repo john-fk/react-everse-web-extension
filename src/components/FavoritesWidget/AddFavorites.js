@@ -28,11 +28,17 @@ const AddFavorites = ({ isToggled, onAdd }) => {
     isToggled();
   };
 
+  const handleKeyPress = (event) => {
+    //TODO Add keyboard event to submit
+    if (event.key === 'Enter') onSubmit(event);
+  };
+
   return (
     <animated.form
       autoComplete="off"
       onSubmit={onSubmit}
       style={fadeInAnimation}
+      // onKeyPress={() => handleKeyPress} //TODO handle keyboard events
       className="favorites__form"
     >
       <div className="favorites__form-name my-2">

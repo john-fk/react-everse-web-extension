@@ -2,59 +2,64 @@ import React, { useState, useEffect } from 'react';
 import AddFavorites from './AddFavorites';
 import FavoritesList from './FavoritesList';
 import store from 'store';
-import { showSuccessMessage } from '../../utils';
-import './index.scss';
+import { showSuccessMessage, pickRandomColor } from '../../utils';
+import { SubHeading } from '../UI/Heading';
+import './FavoriteWidget.scss';
 
 const FavoritesWidget = () => {
-  const [toggle, setToggle] = useState(false);
-  const [texts, setText] = useState([]);
+  const [formState, setFormState] = useState(false);
+  const [usersFavorite, setUsersFavorite] = useState([]);
   const storageKey = 'Current_favorite';
 
   useEffect(() => {
     const storedFavorites = store.get(storageKey);
-    storedFavorites && setText(storedFavorites);
+    storedFavorites && setUsersFavorite(storedFavorites);
   }, []);
 
   useEffect(() => {
-    store.set(storageKey, texts);
-  }, [texts]);
+    store.set(storageKey, usersFavorite);
+  }, [usersFavorite]);
 
-  const toggleForm = () => {
-    setToggle(!toggle);
+  const showAddFavoriteForm = () => {
+    setFormState(!formState);
   };
 
-  const deleteFavorites = (e, id, name) => {
+  const onDeleteFavorites = (e, id, name) => {
     e.preventDefault();
     const confirmDelete = confirm(`Are you sure you want to delete ${name}?`);
 
     if (confirmDelete) {
-      setText(texts.filter((text) => text.id !== id));
+      setUsersFavorite(usersFavorite.filter((favorite) => favorite.id !== id));
       showSuccessMessage(`Successfully deleted ${name} `);
     }
-
     return;
   };
 
-  const addFavorite = (favorite) => {
+  const onAddFavorite = (favorite) => {
     const id = Math.floor(Math.random() * 1000) + 1;
-    const bgColor = `#${Math.floor(Math.random() * 16777215).toString(16)}
-    `;
+    const bgColor = pickRandomColor();
+
     const newFavorite = { id, bgColor, favorite };
-    setText([...texts, newFavorite]);
+    setUsersFavorite([...usersFavorite, newFavorite]);
   };
 
   return (
-    <div className="bg1">
-      <div className="favorites">
-        {!toggle && (
-          <FavoritesList
-            favorites={texts}
-            toggleForm={toggleForm}
-            onDelete={deleteFavorites}
-          />
-        )}
-        {toggle && <AddFavorites isToggled={toggleForm} onAdd={addFavorite} />}
-      </div>
+    <div className="favorites">
+      <SubHeading
+        text={`You have ${
+          usersFavorite.length > 0 ? usersFavorite.length : 'no'
+        } favorite websites`}
+      />
+      {!formState && (
+        <FavoritesList
+          favorites={usersFavorite}
+          toggleForm={showAddFavoriteForm}
+          onDelete={onDeleteFavorites}
+        />
+      )}
+      {formState && (
+        <AddFavorites isToggled={showAddFavoriteForm} onAdd={onAddFavorite} />
+      )}
     </div>
   );
 };

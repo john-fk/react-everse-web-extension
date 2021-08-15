@@ -1,61 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import WeatherCity from './WeatherCity';
-import WeatherUnit from './WeatherUnit';
-import WeatherCondition from './WeatherCondition';
 import axios from 'axios';
-import useAxios from 'axios-hooks';
-import BarLoader from 'react-spinners/BarLoader';
-import { css } from '@emotion/core';
-import { MdRefresh } from 'react-icons/md';
-import './index.scss';
+import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { currentUserIp } from '../../EverseStates';
+import './WeatherWidget.scss';
+import WeatherIcon from './WeatherIcon';
+import LoadingIcon from '../UI/LoadingIcon';
+import { WiCelsius, WiFahrenheit } from 'react-icons/wi';
+import WeatherLocation from './WeatherLocation';
+import WeatherUnit from './WeatherUnit';
+
+async function fetchDataFromApi(lat, lon) {
+  const res = await axios(
+    `${process.env.OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}`
+  );
+  const fetchedData = await res.data;
+  // console.log(fetchedData);
+  return fetchedData;
+}
 
 const WeatherWidget = () => {
-  const [city, setCity] = useState([]);
+  const ipData = useRecoilValue(currentUserIp);
+  const { lat, lon } = ipData;
+  const [weatherData, setWeatherData] = useState({});
 
-  // Can be a string as well. Need to ensure each key-value pair ends with ;
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
+  const hasIpLoaded = ipData?.status;
 
-  const getCity = axios('http://ip-api.com/json');
-  getCity
-    .then((res) => setCity(res.data.city))
-    .catch((err) => `Oops there was an error ${err}`);
+  const { data, isLoading, isError, isFetching } = useQuery(
+    ['userWeatherData', lat, lon],
+    () => fetchDataFromApi(lat, lon),
+    {
+      enabled: !!hasIpLoaded,
+    }
+  );
 
-  const requestOptions = {
-    method: 'GET',
-    url: `https://api.openweathermap.org/data/2.5/weather`,
-    params: {
-      q: city,
-      appid: process.env.OPEN_WEATHER_MAP_API_KEY,
-      units: 'imperial',
-    },
-  };
+  useEffect(() => {
+    setWeatherData(data);
+  }, [data]);
 
-  const [{ data, loading, error }, reFetchData] = useAxios(requestOptions);
+  if (isFetching || !hasIpLoaded || isLoading) return <LoadingIcon />;
+  if (isError) return <SubHeading text={`Check your internet connection`} />;
 
-  if (loading)
-    return <BarLoader loading={true} css={override} size={10} color="#FFF" />;
-
-  if (error) return <p>Error!</p>;
-
-  console.log(data);
   return (
-    <div className="bg1">
-      <div className="weather">
-        <div className="weather__temp">
-          <WeatherCity city={city} />
-          <WeatherUnit data={data} />
-          <WeatherCondition conditionData={data.weather} />
-        </div>
-        <MdRefresh
-          title="Refresh"
-          className="weather__refresh"
-          onClick={() => reFetchData()}
-        />
-      </div>
+    <div className="weather">
+      {!isLoading && (
+        <>
+          <WeatherIcon iconData={weatherData?.current} />
+          <WeatherUnit unitData={weatherData?.current} />
+          <WeatherLocation locationData={ipData} />
+        </>
+      )}
     </div>
   );
 };
