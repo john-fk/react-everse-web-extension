@@ -2,34 +2,41 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AddButtonIcon from '../UI/AddButtonIcon';
 
-const AddTask = ({ label, onAdd }) => {
-  const [text, setText] = useState('');
+const AddTask = ({ label, onAddTask }) => {
+  const [userTaskText, setUserTaskText] = useState('');
 
-  const onSubmit = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    onAdd(text);
-    setText('');
+    onAddTask(userTaskText);
+    setUserTaskText('');
   };
 
   return (
     <div className="task__add">
-      <form className=" task__form" autoComplete="off" onSubmit={onSubmit}>
+      <form
+        className=" task__form"
+        autoComplete="off"
+        onSubmit={handleOnSubmit}
+      >
         <input
           type="text"
-          className="task__form-input bg-none form-control"
-          placeholder=" "
+          className="task__form-input  bg-none form-control mr-3 text-left "
+          placeholder="Create a new task..."
           id="taskInput"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
+          value={userTaskText}
+          onChange={(event) => setUserTaskText(event.target.value)}
         />
-        <label htmlFor="taskInput">{label}</label>
+        {/* <label htmlFor="taskInput">{label}</label> */}
       </form>
-      <AddButtonIcon onAdd={onSubmit} isVisible={text.length > 0 && true} />
+      <AddButtonIcon
+        onAdd={handleOnSubmit}
+        isVisible={userTaskText.length > 0}
+      />
     </div>
   );
 };
 
-AddTask.defaultProps = { label: 'Add A New Task...' };
-AddTask.propTypes = { label: PropTypes.string };
+// AddTask.defaultProps = { label: 'Add A New Task...' };
+// AddTask.propTypes = { label: PropTypes.string };
 
 export default AddTask;

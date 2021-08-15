@@ -1,0 +1,9 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.delete-icon-button {
+  &:hover {
+    color: rgba($-color-primary, 0.85);
+    cursor: pointer;
+  }
+}

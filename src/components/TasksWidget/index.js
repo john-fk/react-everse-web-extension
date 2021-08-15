@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
+import { SubHeading } from '../UI/Heading';
 import { showSuccessMessage } from '../../utils';
 import store from 'store';
-import './index.scss';
+import './TaskWidget.scss';
 
 const TasksWidget = () => {
   const [tasks, setTasks] = useState([]);
@@ -34,12 +35,15 @@ const TasksWidget = () => {
   };
 
   return (
-    <div className="bg1">
-      <div className="task">
-        <AddTask onAdd={addTask} />
+    <>
+      <SubHeading
+        text={`There are ${tasks.length > 0 ? tasks.length : 'no'} tasks to do`}
+      />
+      <div className="task mt-1">
+        <AddTask onAddTask={addTask} />
         <TaskList tasks={tasks} onDelete={deleteTask} />
       </div>
-    </div>
+    </>
   );
 };
 

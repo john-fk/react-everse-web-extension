@@ -42,8 +42,9 @@
   // visibility: hidden;
   scroll-snap-type: y mandatory;
   width: 100%;
+
   &::-webkit-scrollbar {
-    width: 9px;
+    width: 7px;
     &-track {
       background: rgba($-color-bg, 0.5);
       border-radius: 10px;

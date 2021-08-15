@@ -1,11 +1,14 @@
 import React from 'react';
 import { MdDelete } from 'react-icons/md';
+import './DeleteButtonIcon.scss';
 
 const DeleteButtonIcon = ({ onDelete }) => {
   return (
-    <div className="delete-icon-button">
-      <MdDelete onClick={onDelete} />
-    </div>
+    <>
+      <span className="delete-icon-button">
+        <MdDelete onClick={onDelete} />
+      </span>
+    </>
   );
 };
 
