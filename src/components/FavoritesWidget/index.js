@@ -45,7 +45,11 @@ const FavoritesWidget = () => {
 
   return (
     <div className="favorites">
-      <SubHeading text={`You have ${usersFavorite.length} favorite websites`} />
+      <SubHeading
+        text={`You have ${
+          usersFavorite.length > 0 ? usersFavorite.length : 'no'
+        } favorite websites`}
+      />
       {!formState && (
         <FavoritesList
           favorites={usersFavorite}
