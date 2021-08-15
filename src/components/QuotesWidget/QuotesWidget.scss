@@ -1,0 +1,12 @@
+.quotes {
+  &__inner {
+    line-height: 41.4px;
+  }
+  &__content {
+    font-size: 2.3em;
+  }
+  &__author {
+    font-size: 0.95rem;
+    text-align: right;
+  }
+}

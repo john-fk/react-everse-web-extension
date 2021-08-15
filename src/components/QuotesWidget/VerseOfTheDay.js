@@ -4,10 +4,10 @@ const VerseOfTheDay = ({ data }) => {
   let { text, reference } = data.details || '--';
 
   return (
-    <div>
-      <p className="quote__content">{text}</p>
-      <p className="quote__author">{reference}</p>
-    </div>
+    <>
+      <p className="quotes__content">{text}</p>
+      <p className="quotes__author">{reference}</p>
+    </>
   );
 };
 

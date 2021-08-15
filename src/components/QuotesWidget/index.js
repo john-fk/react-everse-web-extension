@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import VerseOfTheDay from './VerseOfTheDay';
 import QuoteOfTheDay from './QuoteOfTheDay';
 import QuotesHeader from './QuotesHeader';
 import { fetchData } from '../../utils';
 import { Select } from 'antd';
 import store from 'store';
+import './QuotesWidget.scss';
 
 const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
 const motivationAPI = 'https://type.fit/api/quotes';
@@ -53,31 +53,27 @@ const QuotesWidget = () => {
   };
 
   return (
-    <div className="bg1">
-      <div className="quotes">
-        <div className="quotes__inner p-5">
-          <div className="quotes__today">
-            {isBibleSelected() && <VerseOfTheDay data={bible} />}
-            {!isBibleSelected() && <QuoteOfTheDay data={motivation} />}
-          </div>
+    <div className="quotes">
+      <div className="quotes__inner ">
+        {isBibleSelected() && <VerseOfTheDay data={bible} />}
+        {!isBibleSelected() && <QuoteOfTheDay data={motivation} />}
 
-          <div className="quotes__settings ">
-            <Select
-              defaultValue={getLocalMode}
-              style={{ width: 200 }}
-              onChange={handleChange}
-              bordered={false}
-              className="quotes__options"
-              dropdownClassName="quotes__dropdown"
-            >
-              <Option value={bString} disabled={isBibleSelected()}>
-                Spirituality
-              </Option>
-              <Option value={mString} disabled={!isBibleSelected()}>
-                Motivational
-              </Option>
-            </Select>
-          </div>
+        <div className="quotes__settings ">
+          <Select
+            defaultValue={getLocalMode}
+            style={{ width: 200 }}
+            onChange={handleChange}
+            bordered={false}
+            className="quotes__options"
+            dropdownClassName="quotes__dropdown"
+          >
+            <Option value={bString} disabled={isBibleSelected()}>
+              Spirituality
+            </Option>
+            <Option value={mString} disabled={!isBibleSelected()}>
+              Motivational
+            </Option>
+          </Select>
         </div>
       </div>
     </div>
