@@ -1,86 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import VerseOfTheDay from './VerseOfTheDay';
-import QuoteOfTheDay from './QuoteOfTheDay';
-import QuotesHeader from './QuotesHeader';
-import { fetchData } from '../../utils';
-import { Select } from 'antd';
+import { SubHeading } from '../UI/Heading';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 import store from 'store';
 import './QuotesWidget.scss';
+import LoadingIcon from '../UI/LoadingIcon';
 
-const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
-const motivationAPI = 'https://type.fit/api/quotes';
-const { Option } = Select;
-const bString = 'spirituality';
-const mString = 'motivational';
 const storageKey = 'Current_quotes';
 
+const fetchInspirationDataFromApi = () =>
+  axios(process.env.INSPIRATION_API_URL).then((res) => res.data);
+
 const QuotesWidget = () => {
-  const [bible, setBible] = useState([]);
-  const [motivation, setMotivation] = useState([]);
-  const [mode, setMode] = useState(bString);
+  const { data, isLoading, isError } = useQuery(
+    'userQuotes',
+    fetchInspirationDataFromApi
+  );
 
-  const isBibleSelected = checkSelected(mode, bString);
+  /*
+  After fetching the quote RAW data returns a random quote as an Array
+  */
+  const getRandomQuotes = () =>
+    !isLoading && data[Math.floor(Math.random() * data.length)];
 
-  function handleChange(value) {
-    value === bString ? setMode(value) : setMode(mString);
-  }
-
-  useEffect(() => {
-    const storedQuotes = store.get(storageKey);
-    storedQuotes && setMode(storedQuotes);
-    // handleChange(storedQuotes);
-  }, []);
-
-  useEffect(() => {
-    store.set(storageKey, mode);
-  }, [mode]);
-
-  useEffect(() => {
-    const getAllData = async () => {
-      const bibleData = await fetchData(bibleAPI);
-      const motivationData = await fetchData(motivationAPI);
-      const randomMotivationalQuote =
-        motivationData[Math.floor(Math.random() * motivationData.length)];
-
-      setBible(bibleData.verse);
-      setMotivation(randomMotivationalQuote);
-    };
-    getAllData();
-  }, []);
-
-  const getLocalMode = () => {
-    return store.get(storageKey) === bString ? mode : mString;
-  };
+  if (isLoading) return <LoadingIcon />;
+  if (isError) return <SubHeading text={`Check your internet connection`} />;
 
   return (
-    <div className="quotes">
-      <div className="quotes__inner ">
-        {isBibleSelected() && <VerseOfTheDay data={bible} />}
-        {!isBibleSelected() && <QuoteOfTheDay data={motivation} />}
-
-        <div className="quotes__settings ">
-          <Select
-            defaultValue={getLocalMode}
-            style={{ width: 200 }}
-            onChange={handleChange}
-            bordered={false}
-            className="quotes__options"
-            dropdownClassName="quotes__dropdown"
-          >
-            <Option value={bString} disabled={isBibleSelected()}>
-              Spirituality
-            </Option>
-            <Option value={mString} disabled={!isBibleSelected()}>
-              Motivational
-            </Option>
-          </Select>
+    <>
+      <SubHeading text="Inspiration quote for your day" />
+      <div className="quotes">
+        <div className="quotes__inner mt-3">
+          <p className="quotes__content m-0">
+            {!isLoading && getRandomQuotes().text}
+          </p>
+          <p className="quotes__autour m-0">
+            - {!isLoading && getRandomQuotes().author}
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default QuotesWidget;
-function checkSelected(mode, str) {
-  return () => (mode === str ? true : false);
-}
