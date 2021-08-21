@@ -5,6 +5,7 @@ import axios from 'axios';
 import store from 'store';
 import './QuotesWidget.scss';
 import LoadingIcon from '../UI/LoadingIcon';
+import Quote from './Quote';
 
 const storageKey = 'Current_quotes';
 
@@ -16,6 +17,7 @@ const QuotesWidget = () => {
     'userQuotes',
     fetchInspirationDataFromApi
   );
+  const [currentQuote, setCurrentQuote] = useState([]);
 
   /*
   After fetching the quote RAW data returns a random quote as an Array
@@ -26,17 +28,14 @@ const QuotesWidget = () => {
   if (isLoading) return <LoadingIcon />;
   if (isError) return <SubHeading text={`Check your internet connection`} />;
 
+  const { author, text } = getRandomQuotes();
+
   return (
     <>
       <SubHeading text="Inspiration quote for your day" />
       <div className="quotes">
         <div className="quotes__inner mt-3">
-          <p className="quotes__content m-0">
-            {!isLoading && getRandomQuotes().text}
-          </p>
-          <p className="quotes__autour m-0">
-            - {!isLoading && getRandomQuotes().author}
-          </p>
+          {<Quote author={author} text={text} />}
         </div>
       </div>
     </>
