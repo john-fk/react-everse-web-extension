@@ -7,14 +7,14 @@ import './QuotesWidget.scss';
 import LoadingIcon from '../UI/LoadingIcon';
 import Quote from './Quote';
 
-const storageKey = 'Current_quotes';
+const userQuotes = 'userQuotes';
 
 const fetchInspirationDataFromApi = () =>
   axios(process.env.INSPIRATION_API_URL).then((res) => res.data);
 
 const QuotesWidget = () => {
   const { data, isLoading, isError } = useQuery(
-    'userQuotes',
+    userQuotes,
     fetchInspirationDataFromApi
   );
   const [currentQuote, setCurrentQuote] = useState([]);
