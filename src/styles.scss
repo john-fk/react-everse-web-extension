@@ -64,21 +64,6 @@ h6 {
   margin: 0;
 }
 
-.layout {
-  .react-grid-item {
-    .react-resizable-handle {
-      background-color: rgba($-color-primary, 0.3);
-      visibility: hidden;
-      &:hover {
-        background-color: rgba($-color-primary, 1);
-      }
-    }
-    &:hover .react-resizable-handle {
-      visibility: visible;
-    }
-  }
-}
-
 .toggledWidget {
   display: none;
   background-color: $-color-gray;
