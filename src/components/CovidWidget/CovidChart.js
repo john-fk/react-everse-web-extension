@@ -19,8 +19,8 @@ const CovidChart = ({ covidData }) => {
         },
       },
     ],
-    labels: ['Infections', 'Recovered', 'Deaths'],
-    colors: ['#D0D2DA', '#00B7FE', '#FD2254'],
+    labels: ['Infected', 'Recovered', 'Critical Cases', 'Deaths Today'],
+    colors: ['#66bb6a', '#42a5f5', '#7e57c2', '#ef5350'],
     dataLabels: { enabled: false }, //Shows the % in the pie
     states: {
       hover: {
