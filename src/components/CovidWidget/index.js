@@ -1,15 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { useSetRecoilState } from 'recoil';
+import { currentUserIp } from '../../EverseStates';
 import CovidChart from './CovidChart';
+import CountryFlag from './CountryFlag';
 import { SubHeading } from '../UI/Heading';
 import LoadingIcon from '../UI/LoadingIcon';
-import { useRecoilState } from 'recoil';
-import { currentUserIp } from '../../EverseStates';
 import './CovidWidget.scss';
 
 const CovidWidget = () => {
-  const [ipAddress, setIpAddress] = useRecoilState(currentUserIp);
+  const setIpAddress = useSetRecoilState(currentUserIp);
 
   const { data: ipData, isLoading: loadingIpAddress } = useQuery(
     'userIpAddress',
@@ -19,9 +20,6 @@ const CovidWidget = () => {
       const country = await fetchedData.country;
       setIpAddress(fetchedData);
       return country;
-    },
-    {
-      refetchOnWindowFocus: false,
     }
   );
 
@@ -30,6 +28,7 @@ const CovidWidget = () => {
     async () => {
       const res = await axios(`${process.env.COVID19_API_URL}${ipData}`);
       const fetchedData = await res.data;
+      // console.log(fetchedData);
       return fetchedData;
     },
     { enabled: !loadingIpAddress, refetchOnWindowFocus: false }
@@ -38,12 +37,29 @@ const CovidWidget = () => {
   if (loadingIpAddress || isLoading) return <LoadingIcon />;
   if (isError) return <SubHeading text={`Check your internet connection`} />;
 
-  const { cases, recovered, tests, deaths } = covidData;
+  const {
+    todayCases,
+    todayRecovered,
+    critical,
+    todayDeaths,
+    country,
+    countryInfo,
+  } = covidData;
 
   return (
     <div className="covid">
-      <SubHeading text={`Update status for ${ipAddress.country}`} />
-      <CovidChart covidData={[cases, recovered, deaths]} />
+      <div className="d-flex align-items-center">
+        <SubHeading
+          text={`Update status for ${country} `}
+          children={
+            <CountryFlag imageUrl={countryInfo.flag} imageAlt={country} />
+          }
+        />
+      </div>
+
+      <CovidChart
+        covidData={[todayCases, todayRecovered, critical, todayDeaths]}
+      />
     </div>
   );
 };
