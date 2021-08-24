@@ -5,7 +5,7 @@ const CountryFlag = ({ imageUrl, imageAlt }) => {
     <img
       src={imageUrl}
       alt={`${imageAlt} flag`}
-      style={{ width: '5.5%' }}
+      style={{ width: '5.5%', borderRadius: '3px' }}
       className="mx-1"
     />
   );
