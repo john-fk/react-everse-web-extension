@@ -26,9 +26,11 @@ const CovidWidget = () => {
   const { data: covidData, isLoading, isError } = useQuery(
     'userCovidStats',
     async () => {
-      const res = await axios(`${process.env.COVID19_API_URL}${ipData}`);
+      const res = await axios(
+        `${process.env.COVID19_API_URL}${ipData}?yesterday=true`
+      );
       const fetchedData = await res.data;
-      // console.log(fetchedData);
+      console.log(fetchedData);
       return fetchedData;
     },
     { enabled: !loadingIpAddress, refetchOnWindowFocus: false }

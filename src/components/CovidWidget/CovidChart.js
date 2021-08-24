@@ -19,7 +19,7 @@ const CovidChart = ({ covidData }) => {
         },
       },
     ],
-    labels: ['Infected', 'Recovered', 'Critical Cases', 'Deaths Today'],
+    labels: ['Infected', 'Recovered', 'Critical Cases', 'Deaths '],
     colors: ['#66bb6a', '#42a5f5', '#7e57c2', '#ef5350'],
     dataLabels: { enabled: false }, //Shows the % in the pie
     states: {
@@ -42,6 +42,11 @@ const CovidChart = ({ covidData }) => {
       fontSize: '14px',
       fontFamily: 'Alata, Arial',
       inverseOrder: true,
+      floating: false,
+      itemMargin: {
+        vertical: 5,
+        horizontal: -5,
+      },
       /*
      TODO  Use this format option to show the legend percentages
      
