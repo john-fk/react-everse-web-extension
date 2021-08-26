@@ -25,10 +25,26 @@ Once all the dependencies are installed, you'll need to build and install the ap
 
 The above command will build a production ready version of the app you can now install to your browser ie chrome based (google chrome, vivaldi, brave) or firefox browser.
 
-Once the extention is installed locally on your browser you can now start your development server with the following command 👩‍💻
+Once the extension is installed locally on your browser you can now start your development server with the following command 👩‍💻
 
     yarn start
 
 It starts a development server and lunches your default browser for you now you can start coding and seeing your changes on save live.
 
 After you are satisfied with your work. you can make your PR and we will review your code before merging to the main branch 🔥.
+
+##### Working with Offline Data
+
+If you want to work with offline data you can! To do this you have to install json-server
+
+    npm install -g json-server
+
+You can now work with offline data using the db.json file located in the root directory, feel free to edit it by adding your own data as you wish.
+
+When you are ready it's time to fire off local server, in your terminal, run the following command to lunch and watch the server
+
+    json-server --watch db.json <Your Json data file name>
+
+Make sure the server is running in another process/terminal.
+
+Check out the documentation for more information on: https://github.com/typicode/json-server
