@@ -16,6 +16,7 @@
     "start": "parcel serve src/index.html --port 1987 --open",
     "build-prod": "parcel build src/index.html src/manifest.json  --no-source-maps",
     "audit:fix": "npx yarn-audit-fix",
+    "serve": "json-server --watch db.json",
     "test": "jest"
   },
   "dependencies": {
