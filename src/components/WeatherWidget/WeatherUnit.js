@@ -3,16 +3,19 @@ import { kelvinToFahrenheit, kelvinToCelsius } from '../../utils';
 import WeatherControls from './WeatherControls';
 
 function WeatherUnit({ unitData }) {
-  const [currentUnit, setCurrentUnit] = useState(false);
-
+  const defaultUnit = 'fahrenheit';
+  const celsius = 'celsius';
   const kelvin = unitData?.temp;
-  const fahrenheit = kelvinToFahrenheit(kelvin);
-  const celsius = kelvinToCelsius(kelvin);
+  const convertedFahrenheit = kelvinToFahrenheit(kelvin);
+  const convertedCelsius = kelvinToCelsius(kelvin);
 
-  const handleUnitChanged = () => {
-    // Change the states compar deprecated logical
-    console.log('clicked');
-    setCurrentUnit(!currentUnit);
+  const [currentUnit, setCurrentUnit] = useState(() => defaultUnit);
+
+  const handleFahrenheit = () => {
+    setCurrentUnit(defaultUnit);
+  };
+  const handleCelsius = () => {
+    setCurrentUnit(celsius);
   };
 
   return (
@@ -20,9 +23,14 @@ function WeatherUnit({ unitData }) {
       {unitData && (
         <>
           <h2>
-            {(currentUnit && `${fahrenheit}`) || (!currentUnit && `${celsius}`)}
+            {(currentUnit === defaultUnit && `${convertedFahrenheit}`) ||
+              (currentUnit === celsius && `${convertedCelsius}`)}
           </h2>
-          <WeatherControls handleClick={handleUnitChanged} />
+          <WeatherControls
+            isFahrenheit={handleFahrenheit}
+            isCelsius={handleCelsius}
+            isActive={currentUnit === defaultUnit && true}
+          />
         </>
       )}
     </div>

@@ -18,9 +18,10 @@
       display: grid;
       align-content: center;
       &__item {
-        font-size: 2em;
+        font-size: 2.5em;
+
         &--active {
-          font-size: 3em;
+          color: $-color-gray;
         }
       }
     }
@@ -34,65 +35,6 @@
   }
   &__location {
     font-size: 2.3em;
-  }
-
-  &__refresh {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.3rem;
-  }
-
-  &__temp {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-  }
-  &__temperature {
-    min-width: 10rem;
-    .current {
-      width: 60%;
-      padding: 0.1rem;
-    }
-
-    .units {
-      width: 40%;
-      & li {
-        background: none;
-        border: none;
-        padding: 0 0.3rem;
-
-        & > button {
-          @include transparent-button();
-        }
-      }
-      .isActive {
-        color: $-color-white;
-        transition: all 0.3s linear;
-        font-size: 1.5rem;
-      }
-      .notActive {
-        color: $-color-gray;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s linear;
-        font-size: 1rem;
-      }
-
-      .divider {
-        background-color: $-color-white;
-        width: 100%;
-        margin: 0rem;
-      }
-    }
-  }
-
-  &:hover .notActive {
-    opacity: 1;
-    visibility: visible;
-  }
-  &:hover .isActive {
-    font-size: 1rem;
   }
 
   @include hover-effect();
