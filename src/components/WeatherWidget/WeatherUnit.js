@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { kelvinToFahrenheit, kelvinToCelsius } from '../../utils';
 import WeatherControls from './WeatherControls';
+import store from 'store';
 
 function WeatherUnit({ unitData }) {
   const defaultUnit = 'fahrenheit';
   const celsius = 'celsius';
+
+  const storageKey = 'local-selected-unit';
+
   const kelvin = unitData?.temp;
   const convertedFahrenheit = kelvinToFahrenheit(kelvin);
   const convertedCelsius = kelvinToCelsius(kelvin);
@@ -17,6 +21,15 @@ function WeatherUnit({ unitData }) {
   const handleCelsius = () => {
     setCurrentUnit(celsius);
   };
+
+  useEffect(() => {
+    const storedUnit = store.get(storageKey);
+    storedUnit && setCurrentUnit(storedUnit);
+  }, []);
+
+  useEffect(() => {
+    store.set(storageKey, currentUnit);
+  }, [currentUnit]);
 
   return (
     <div className="weather__unit">

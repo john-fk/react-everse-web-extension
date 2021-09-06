@@ -65,11 +65,11 @@ const WeatherIcon = ({ iconData }) => {
 
   return (
     <>
-      <i className="weather__icon">
+      <span className="weather__icon">
         {currentHour >= 19 || currentHour <= 6
           ? renderNightIcons(iconId)
           : renderDayIcons(iconId)}
-      </i>
+      </span>
     </>
   );
 };

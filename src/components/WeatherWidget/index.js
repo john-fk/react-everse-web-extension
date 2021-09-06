@@ -6,7 +6,7 @@ import { currentUserIp } from '../../EverseStates';
 import './WeatherWidget.scss';
 import WeatherIcon from './WeatherIcon';
 import LoadingIcon from '../UI/LoadingIcon';
-import { WiCelsius, WiFahrenheit } from 'react-icons/wi';
+import { SubHeading } from '../UI/Heading';
 import WeatherLocation from './WeatherLocation';
 import WeatherUnit from './WeatherUnit';
 
@@ -21,7 +21,9 @@ async function fetchDataFromApi(lat, lon) {
 
 const WeatherWidget = () => {
   const ipData = useRecoilValue(currentUserIp);
+
   const { lat, lon } = ipData;
+
   const [weatherData, setWeatherData] = useState({});
 
   const hasIpLoaded = ipData?.status;
@@ -43,11 +45,16 @@ const WeatherWidget = () => {
 
   return (
     <div className="weather">
+      <SubHeading
+        text={`Expect ${weatherData?.current.weather[0].main} today`}
+      />
       {!isLoading && (
         <>
-          <WeatherIcon iconData={weatherData?.current} />
-          <WeatherUnit unitData={weatherData?.current} />
-          <WeatherLocation locationData={ipData} />
+          <div className="weather__inner">
+            <WeatherIcon iconData={weatherData?.current} />
+            <WeatherUnit unitData={weatherData?.current} />
+            <WeatherLocation locationData={ipData} />
+          </div>
         </>
       )}
     </div>
