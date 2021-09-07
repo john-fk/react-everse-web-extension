@@ -46,7 +46,7 @@ const WeatherWidget = () => {
   return (
     <div className="weather">
       <SubHeading
-        text={`Expect ${weatherData?.current.weather[0].main} today`}
+        text={`Expect ${weatherData?.current.weather[0].main} weather today`}
       />
       {!isLoading && (
         <>
