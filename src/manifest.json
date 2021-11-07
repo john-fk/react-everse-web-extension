@@ -1,9 +1,11 @@
 {
   "name": "everse",
-  "version": "1.4",
+  "version": "1.5",
   "description": "A daily companion in your browser",
   "manifest_version": 2,
-
+  "background": {
+    "tab_navigation": "background.js"
+  },
   "browser_action": {
     "default_icon": {
       "16": "img/LOGO-16.png",
@@ -12,17 +14,18 @@
       "128": "img/LOGO-128.png"
     }
   },
-
   "icons": {
     "16": "img/LOGO-16.png",
     "32": "img/LOGO-32.png",
     "48": "img/LOGO-48.png",
     "128": "img/LOGO-128.png"
   },
-
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-
-  "permissions": ["tabs", "storage"]
+  "permissions": [
+    "tabs",
+    "storage",
+    "geolocation"
+  ]
 }
