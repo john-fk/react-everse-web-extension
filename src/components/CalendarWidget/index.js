@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoCalendarOutline } from 'react-icons/io5';
 import moment from 'moment';
+
 import './CalendarWidget.scss';
 
 const CalendarWidget = () => {

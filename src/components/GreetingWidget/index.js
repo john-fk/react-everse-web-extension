@@ -5,12 +5,16 @@ import { SubHeading } from '../UI/Heading';
 import './GreetingWidget.scss';
 import { useRecoilState } from 'recoil';
 import { currentAppTime } from '../../EverseStates';
+import store from 'store';
+
+const userData = store.get('userData');
+// console.log(store.get('userData'));
 
 const TimeOfDay = ({ currentTimeOfDay }) => (
   <h2 className="text-capitalize mb-0">
-    {`Good ${getGreetingTime(currentTimeOfDay)}`}
-    {/* TODO add user name from name entered by the user */}
-    {` Deejay`}
+    {`Good ${getGreetingTime(currentTimeOfDay)} ${
+      userData ? userData?.given_name : ''
+    }`}
   </h2>
 );
 

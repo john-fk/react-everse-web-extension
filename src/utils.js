@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { message } from 'antd';
+import validator from 'validator';
 
 // Gets a random Item from an array
 export const getRandomItem = (data, setDataState) => {
@@ -274,4 +275,25 @@ This function returns a random color from MaterialUi Color SET
 */
 export const pickRandomColor = () => {
   return materialColors[Math.floor(Math.random() * materialColors.length)];
+};
+
+/*
+ Get GeoLocation from user
+*/
+
+export const requestUserGeoLocation = (acceptReq, rejectedReq) => {
+  if (window.navigator.geolocation) {
+    window.navigator.geolocation.getCurrentPosition(acceptReq, rejectedReq);
+  }
+};
+
+/*
+Validate the users input if it is a url or search query
+*/
+
+export const validateOpenNewTab = (url) => {
+  const userUrl = validator.isURL(url);
+  if (userUrl) {
+    window.open(`https://${url}`, '_blank');
+  } else window.open(`https://www.google.com/search?q=${url}`, '_blank');
 };

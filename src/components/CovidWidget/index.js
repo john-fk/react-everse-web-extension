@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
@@ -30,7 +30,6 @@ const CovidWidget = () => {
         `${process.env.COVID19_API_URL}${ipData}?yesterday=true`
       );
       const fetchedData = await res.data;
-      // console.log(fetchedData);
       return fetchedData;
     },
     { enabled: !loadingIpAddress, refetchOnWindowFocus: false }
