@@ -51,7 +51,7 @@ const CovidWidget = () => {
     <div className="covid">
       <div className="d-flex align-items-center">
         <SubHeading
-          text={`Update status for ${country} `}
+          text={country}
           children={
             <CountryFlag imageUrl={countryInfo.flag} imageAlt={country} />
           }

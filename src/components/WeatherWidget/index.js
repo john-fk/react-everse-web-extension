@@ -10,6 +10,7 @@ import { SubHeading } from '../UI/Heading';
 import WeatherLocation from './WeatherLocation';
 import WeatherUnit from './WeatherUnit';
 import { requestUserGeoLocation } from '../../utils';
+import moment from 'moment';
 
 async function fetchedWeather(latitude, longitude) {
   const res = await axios(
@@ -24,7 +25,7 @@ const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState({});
   const [userGeoLocation, setUserGeoLocation] = useState({});
 
-  let hasIpLoaded = userGeoLocation?.lat ? userGeoLocation?.lat : ipData?.lat; // Monitor the users
+  let hasIpLoaded = userGeoLocation?.lat ? userGeoLocation?.lat : ipData?.lat;
 
   const getLocationMethod = (latitudeType, longitudeType) => {
     if (userGeoLocation) {
@@ -71,7 +72,7 @@ const WeatherWidget = () => {
   return (
     <div className="weather">
       <SubHeading
-        text={`Expect ${weatherData?.current.weather[0].main} weather today`}
+        text={`Expect ${weatherData?.current.weather[0].description} today`}
       />
       {!isLoading && (
         <>
