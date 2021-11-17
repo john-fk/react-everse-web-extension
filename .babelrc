@@ -8,8 +8,20 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": [["import", {
-    "libraryName": "antd",
-    "style": false
-  }],"@emotion"]
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "fileName": false
+      }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": false
+      }
+    ],
+    "@emotion"
+  ]
 }
