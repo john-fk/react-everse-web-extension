@@ -297,3 +297,20 @@ export const validateOpenNewTab = (url) => {
     window.open(`https://${url}`, '_blank');
   } else window.open(`https://www.google.com/search?q=${url}`, '_blank');
 };
+
+/*
+Get data about the user battery status
+*/
+export const isBatteryCharging = () => {
+  let batteryIsCharging = false;
+
+  navigator.getBattery().then(function (battery) {
+    batteryIsCharging = battery.charging;
+
+    battery.addEventListener('chargingchange', function () {
+      batteryIsCharging = battery.charging;
+    });
+  });
+
+  return batteryIsCharging;
+};

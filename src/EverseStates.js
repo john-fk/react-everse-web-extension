@@ -11,6 +11,11 @@ export const currentUserIp = atom({
   default: {},
 });
 
+export const currentUserName = atom({
+  key: 'userName',
+  default: '',
+});
+
 /*
 An example of how recoil is used in the desired component
 
