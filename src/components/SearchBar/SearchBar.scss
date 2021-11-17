@@ -13,14 +13,17 @@
     border-bottom-left-radius: $-size-md;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    &:hover,
+    &:focus {
+      border-color: $-color-gray;
+      box-shadow: none;
+    }
   }
   &__input {
     padding-left: 1.5em;
 
     .ant-input-group > .ant-input:first-child,
     .ant-input-group-addon:first-child {
-      background: #000;
-
       &:hover,
       &:focus {
         border-color: $-color-gray;
@@ -36,13 +39,13 @@
 
       display: flex;
       align-items: center;
-      background-color: $-color-gray;
+      background-color: $-color-dark;
       border: $-color-gray;
-      color: $-color-black;
+      color: $-color-gray;
       letter-spacing: 1px;
 
       &:hover {
-        background-color: $-color-dark;
+        background-color: rgba($color: $-color-dark, $alpha: 0.8);
       }
     }
   }

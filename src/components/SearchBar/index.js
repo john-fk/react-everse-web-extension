@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { Input } from 'antd';
 import { validateOpenNewTab } from '../../utils';
-import { SearchOutlined, GoogleOutlined } from '@ant-design/icons';
-import './searchInput.scss';
+import { BiSearchAlt } from 'react-icons/bi';
+import { FcGoogle } from 'react-icons/fc';
+import styled from 'styled-components';
+import './SearchBar.scss';
 
 const { Search } = Input;
 
-const SearchInput = () => {
+const Icon = () => {
+  return (
+    <IconWrapper>
+      <BiSearchAlt />
+    </IconWrapper>
+  );
+};
+
+const SearchBar = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleSearch = (value) => {
@@ -17,14 +27,14 @@ const SearchInput = () => {
     <div className="search">
       <Search
         autoFocus
-        className="search__input"
+        className="search__input align-items-center"
         placeholder="Search or enter your address"
         type="text"
         size="large"
         onSearch={handleSearch}
         // bordered={isFocused}
-        prefix={<GoogleOutlined />}
-        enterButton={<SearchOutlined />}
+        prefix={<FcGoogle />}
+        enterButton={<Icon />}
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}
       />
@@ -32,4 +42,9 @@ const SearchInput = () => {
   );
 };
 
-export default SearchInput;
+export default SearchBar;
+
+const IconWrapper = styled.div`
+  font-size: 1.2em;
+  display: flex;
+`;
