@@ -4,6 +4,7 @@ import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { message } from 'antd';
 import validator from 'validator';
+import store from 'store';
 
 // Gets a random Item from an array
 export const getRandomItem = (data, setDataState) => {
@@ -249,32 +250,43 @@ export const kelvinToCelsius = (unitValue) => {
 An array of  materialUI Colors
 */
 export const materialColors = [
-  '#ef5350',
-  '#ec407a',
-  '#ab47bc',
-  '#7e57c2',
-  '#5c6bc0',
-  '#42a5f5',
-  '#29b6f6',
-  '#26c6da',
-  '#26a69a',
-  '#66bb6a',
-  '#9ccc65',
-  '#d4e157',
-  '#ffee58',
-  '#ffca28',
-  '#ffa726',
-  '#ff7043',
-  '#bcaaa4',
-  '#bdbdbd',
-  '#90a4ae',
+  {
+    redPrimary: '#ef5350',
+    redSecondary: '#ec407a',
+    purplePrimary: '#ab47bc',
+    purpleSecondary: '#7e57c2',
+    purpleAlt: '#5c6bc0',
+    bluePrimary: '#42a5f5',
+    blueSecondary: '#29b6f6',
+    greenPrimary: '#26c6da',
+    greenSecondary: '#26a69a',
+    greenAlt: '#66bb6a',
+    green: '#9ccc65',
+    darkYellow: '#d4e157',
+    lightYellow: '#ffee58',
+    lightOrange: '#ffca28',
+    darkOrange: '#ffa726',
+    deepOrange: '#ff7043',
+    greyAlt: '#bcaaa4',
+    lightGrey: '#bdbdbd',
+    primaryGrey: '#90a4ae',
+  },
 ];
 
 /*
-This function returns a random color from MaterialUi Color SET
+A simple helper to get access all the colors
 */
-export const pickRandomColor = () => {
-  return materialColors[Math.floor(Math.random() * materialColors.length)];
+export const appColors = materialColors[0];
+
+/*
+This function returns a random color from materialColors Object if null Color
+*/
+export const pickRandomColor = (arr) => {
+  const getRandomColor = (colors) => {
+    const color = Object.keys(colors);
+    return colors[color[(color.length * Math.random()) << 0]];
+  };
+  return !arr ? getRandomColor(materialColors[0]) : getRandomColor(arr);
 };
 
 /*
@@ -299,18 +311,8 @@ export const validateOpenNewTab = (url) => {
 };
 
 /*
-Get data about the user battery status
+Get local usersName data
 */
-export const isBatteryCharging = () => {
-  let batteryIsCharging = false;
-
-  navigator.getBattery().then(function (battery) {
-    batteryIsCharging = battery.charging;
-
-    battery.addEventListener('chargingchange', function () {
-      batteryIsCharging = battery.charging;
-    });
-  });
-
-  return batteryIsCharging;
+export const getLocalUser = () => {
+  return store.get('user_name')?.username;
 };
