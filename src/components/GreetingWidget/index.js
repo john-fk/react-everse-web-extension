@@ -9,12 +9,12 @@ import TimeOfDay from './TimeOfDay';
 
 function GreetingWidget() {
   const [currentTime, setCurrentTime] = useRecoilState(currentAppTime);
+  const usersTimeOfDay = moment().format('H');
+
   setInterval(() => {
     const usersCurrentTime = moment().format('h:mm A');
     setCurrentTime(usersCurrentTime);
   }, 1000);
-
-  const usersTimeOfDay = moment().format('H');
 
   return (
     <div className="greeting-widget">
