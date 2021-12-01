@@ -2,7 +2,7 @@ import React from 'react';
 import GridListWidget from '../../components/GridListWidget';
 import Header from '../../components/Header';
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <>
       <main className="main">
@@ -13,4 +13,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

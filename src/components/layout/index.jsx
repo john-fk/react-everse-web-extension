@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Home from '../../pages/HomePage';
+import Dashboard from '../../pages/Dashboard';
 import OnBoarding from '../../pages/OnboardingPage';
 import { useRecoilValue } from 'recoil';
 import { currentUserName } from '../../EverseStates';
@@ -16,7 +16,7 @@ const AppLayout = () => {
     }
   }, [appUserName]);
 
-  return <>{!hasBoarded ? <OnBoarding /> : <Home />}</>;
+  return <>{!hasBoarded ? <OnBoarding /> : <Dashboard />}</>;
 };
 
 export default AppLayout;
