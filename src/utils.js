@@ -5,6 +5,7 @@ import Shepherd from 'shepherd.js';
 import { message } from 'antd';
 import validator from 'validator';
 import store from 'store';
+import moment from 'moment';
 
 // Gets a random Item from an array
 export const getRandomItem = (data, setDataState) => {
@@ -315,4 +316,18 @@ Get local usersName data
 */
 export const getLocalUser = () => {
   return store.get('user_name')?.username;
+};
+
+/*
+Deletes one item from localStorage at the specified date ie locallyCreatedAt  
+*/
+export const refreshLocalStorageDataByDate = (key, locallyCreatedAt) => {
+  const currentDate = moment().date();
+  if (!store.get(key)) return;
+
+  if (locallyCreatedAt !== currentDate) {
+    store.remove(key);
+  } else {
+    return;
+  }
 };
