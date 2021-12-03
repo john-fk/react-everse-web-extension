@@ -15,5 +15,4 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16.x
-      - run: yarn
-      - run: echo build-prod
+      - run: yarn build-prod
