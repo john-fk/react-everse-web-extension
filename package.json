@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A daily inspirational web-app for everyone",
   "main": "index.js",
+  "private": "true",
   "keywords": [
     "Web Browser Extension",
     "Chrome",
@@ -54,5 +55,9 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.11",
     "yarn-audit-fix": "^6.3.5"
+  },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0",
+    "yarn": ">=1.22.0"
   }
 }

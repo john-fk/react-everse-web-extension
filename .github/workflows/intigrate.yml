@@ -16,5 +16,5 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      - run: npm run clean
       - run: npm run build-prod
+      - run: echo It's All Good Here!
