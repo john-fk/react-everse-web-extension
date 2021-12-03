@@ -16,4 +16,4 @@ jobs:
         with:
           node-version: 16.x
       - run: yarn
-      - run: echo It's All Good Here!
+      - run: echo build-prod
