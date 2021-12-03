@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: mskelton/setup-yarn@v1
         with:
-          node-version: 12
-      - run: npm ci
-      - run: npm run build-prod
+          node-version: 16.x
+      - run: yarn
       - run: echo It's All Good Here!
