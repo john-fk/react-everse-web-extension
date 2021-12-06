@@ -27,15 +27,3 @@ jobs:
           type: 'zip'
           filename: './chrome-release.zip'
           path: './dist'
-
-        # Publish to chrome Web-store
-      - name: Publish Updates to Chrome Store
-      - uses: trmcnvn/chrome-addon@v2
-        with:
-          # extension is only necessary when updating an existing addon,
-          # omitting it will create a new addon
-          extension: chomincdpnokbfobkhbkkfgbjmepmpoj
-          zip: ./chrome-release.zip
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
