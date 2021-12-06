@@ -11,6 +11,7 @@ jobs:
   build_production:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Branch
       - uses: actions/checkout@v2
 
       - name: Build Web-Extension With Yarn
