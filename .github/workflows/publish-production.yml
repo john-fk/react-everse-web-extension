@@ -39,10 +39,3 @@ jobs:
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-
-      # Upload / Drop artifact
-      - name: Upload Current Artifacts
-        uses: action/upload-artifact@v2
-        with:
-          name: 'Chrome Artifacts'
-          path: './chrome-release.zip'
