@@ -1,4 +1,4 @@
-name: Web extension Continuos Integration
+name: Web extension CI
 
 on:
   pull_request:
@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout branch & build for production
       - uses: actions/checkout@v2
         name: Build with yarn
       - uses: mskelton/setup-yarn@v1
@@ -21,6 +22,7 @@ jobs:
 
       # Creates a zip file
       - uses: thedoctor0/zip-release@master
+        name: Zip Production Build
         with:
           type: 'zip'
           filename: './chrome-release.zip'
