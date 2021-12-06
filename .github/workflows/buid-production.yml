@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: mskelton/setup-yarn@v1
+
+      - name: Build Web-Extension With Yarn
+        uses: mskelton/setup-yarn@v1
         with:
           node-version: 16.x
       - run: yarn build-prod
