@@ -2,8 +2,9 @@ name: Web extension Continuos Deployment
 
 on:
   push:
-    branches: [main]
-    path: -'src/manifest.json'
+    branches: [release]
+    # To run workflow only when manifest.json has changed
+    # path: -'src/manifest.json'
 
 jobs:
   publish_production:
