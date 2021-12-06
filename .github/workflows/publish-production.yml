@@ -20,7 +20,6 @@ jobs:
       - run: yarn build-prod
 
       # Creates a zip file
-      - name: Create Zip Build
       - uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
