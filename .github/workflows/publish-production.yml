@@ -8,12 +8,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  Build_Production:
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
-
+        name: Build with yarn
         uses: mskelton/setup-yarn@v1
         with:
           node-version: 16.x
