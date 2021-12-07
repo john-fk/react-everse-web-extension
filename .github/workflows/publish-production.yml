@@ -1,25 +1,16 @@
-# Give your workflow a title
-name: Web extension CI 
+name: Web extension CI
 
-# Add events that trigger the workflow 
 on:
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
   push:
-    branches: [main, master]
+    branches: [main]
 
-# Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "Build_Production"
   Build_Production:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checkout branch & build for production
       - uses: actions/checkout@v2
@@ -27,9 +18,11 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16.x
+      - run: yarn
       - run: yarn build-prod
+      - run: yarn test
 
-      # Creates a zip file to publish on store
+      # Creates a zip file
       - uses: thedoctor0/zip-release@master
         name: Zip Production Build
         with:
@@ -48,8 +41,8 @@ jobs:
     #     refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
 
     # Upload / Drop artifact
-    - name: Upload Current Artifacts
-      uses: action/upload-artifact@v2
-      with:
-        name: 'Chrome Artifacts'
-        path: './chrome-release.zip'
+    # - name: Upload Current Artifacts
+    #   uses: action/upload-artifact@v2
+    #   with:
+    #     name: 'Chrome Artifacts'
+    #     path: './chrome-release.zip'
