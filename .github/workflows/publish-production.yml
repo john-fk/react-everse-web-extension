@@ -30,19 +30,19 @@ jobs:
           filename: './chrome-release.zip'
           path: './dist'
 
-    # Publish to chrome Web-store
-    # - uses: trmcnvn/chrome-addon@v2
-    #   name: Publish to Chrome Store
-    #   with:
-    #     extension: chomincdpnokbfobkhbkkfgbjmepmpoj
-    #     zip: ./chrome-release.zip
-    #     client-id: ${{ secrets.CHROME_CLIENT_ID }}
-    #     client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-    #     refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      # Publish to chrome Web-store
+      # - uses: trmcnvn/chrome-addon@v2
+      #   name: Publish to Chrome Store
+      #   with:
+      #     extension: chomincdpnokbfobkhbkkfgbjmepmpoj
+      #     zip: ./chrome-release.zip
+      #     client-id: ${{ secrets.CHROME_CLIENT_ID }}
+      #     client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+      #     refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
 
-    # Upload / Drop artifact
-    # - name: Upload Current Artifacts
-    #   uses: action/upload-artifact@v2
-    #   with:
-    #     name: 'Chrome Artifacts'
-    #     path: './chrome-release.zip'
+      # Upload / Drop artifact
+      - name: Upload Current Artifacts
+        uses: action/upload-artifact@v2
+        with:
+          name: 'Chrome Artifacts'
+          path: './chrome-release.zip'
