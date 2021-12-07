@@ -14,7 +14,7 @@ jobs:
     steps:
       # Checkout branch & build for production
       - uses: actions/checkout@v2
-        name: Build with yarn
+        name: Run Build Script with Yarn
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16.x
@@ -29,12 +29,11 @@ jobs:
           path: './dist'
 
         # Publish to chrome Web-store
-      - uses: trmcnvn/chrome-addon@v2
-        with:
-          # extension is only necessary when updating an existing addon,
-          # omitting it will create a new addon
-          extension: chomincdpnokbfobkhbkkfgbjmepmpoj
-          zip: ./chrome-release.zip
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      # - uses: trmcnvn/chrome-addon@v2
+      #   name: Publish to Chrome Store
+      #   with:
+      #     extension: chomincdpnokbfobkhbkkfgbjmepmpoj
+      #     zip: ./chrome-release.zip
+      #     client-id: ${{ secrets.CHROME_CLIENT_ID }}
+      #     client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+      #     refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}

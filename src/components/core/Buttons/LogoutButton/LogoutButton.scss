@@ -1,0 +1,12 @@
+@import '../../../../sass/variables';
+
+.logout-button {
+  background: $-color-primary !important;
+  color: $-color-white;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.5em;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  text-align: center;
+}

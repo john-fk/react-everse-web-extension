@@ -1,6 +1,9 @@
 import React from 'react';
 
-function Quote({ text, author }) {
+const Quote = ({ quoteData }) => {
+  const text = quoteData?.text;
+  const author = quoteData?.author;
+
   return (
     <div>
       <p className="quotes__content m-0">{text}</p>
@@ -9,6 +12,6 @@ function Quote({ text, author }) {
       </p>
     </div>
   );
-}
+};
 
 export default Quote;

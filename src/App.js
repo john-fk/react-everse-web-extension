@@ -1,11 +1,8 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import GridListWidget from './components/GridListWidget';
-import Header from './components/Header';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppLayout from './components/layout';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -21,11 +18,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <main className="main">
-          <Header />
-          <GridListWidget />
-        </main>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <AppLayout />
       </QueryClientProvider>
     </RecoilRoot>
   );

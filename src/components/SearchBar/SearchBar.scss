@@ -1,0 +1,52 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.search {
+  // width: 30%;
+  // background: $-color-bg;
+  padding: 1em;
+  margin: 0 1.5rem;
+  border-radius: 12px;
+
+  .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+    border-top-left-radius: $-size-md;
+    border-bottom-left-radius: $-size-md;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    &:hover,
+    &:focus {
+      border-color: $-color-gray;
+      box-shadow: none;
+    }
+  }
+  &__input {
+    padding-left: 1.5em;
+
+    .ant-input-group > .ant-input:first-child,
+    .ant-input-group-addon:first-child {
+      &:hover,
+      &:focus {
+        border-color: $-color-gray;
+        box-shadow: none;
+      }
+    }
+
+    & button {
+      border-top-right-radius: $-size-md;
+      border-bottom-right-radius: $-size-md;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+
+      display: flex;
+      align-items: center;
+      background-color: $-color-dark;
+      border: $-color-gray;
+      color: $-color-gray;
+      letter-spacing: 1px;
+
+      &:hover {
+        background-color: rgba($color: $-color-dark, $alpha: 0.8);
+      }
+    }
+  }
+}
